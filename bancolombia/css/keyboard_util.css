@@ -1,0 +1,93 @@
+table.keyboard {
+  /*margin-top: 40px*/
+}
+
+table.bg_button {
+  color: black;
+  font-size: :8pt;
+  font-weight: bold;
+  margin: 0;
+  padding: 2px;
+  text-align: center;
+  border-spacing: 4px;
+  border-collapse: separate;
+}
+
+td.bg_button {
+  width: 24px;
+  height: 22px;
+  background-repeat: no-repeat;
+  background-position: top left;
+  cursor: default
+}
+
+td.bg_buttonSmall {
+  width: 38px;
+  height: 38px;
+  /*background: url('../images/kb/new/img-keyboard.png');*/
+  background-repeat: no-repeat;
+  background-position-x: 2px;
+  cursor: default;
+  font-family: 'CIBFontSans',Arial, Helvetica, sans-serif, Verdana;;
+  font-style: normal;
+  text-align: left;
+  background-color: #FFFFFF;
+  border: 1px solid #2C2A29 !important;
+  font-size: 16px;
+}
+
+td.brr_button {
+  width: 52px;
+  height: 22px;
+  background-repeat: no-repeat;
+  background-position-x: 2px;
+  cursor: default;
+  vertical-align: top;
+  color: #434343;
+  padding-top: 0;
+  font-size: 12px
+}
+
+.lockedColorText {
+  color: #999
+}
+
+.textoInfo {
+  font-family: CIBFontSans, Arial, Helvetica, sans-serif, Verdana;
+  background-color: #fff;
+  border: black 0 solid;
+  color: #000;
+  font-size: 8pt;
+  font-style: normal;
+  font-weight: bold;
+  text-align: justify
+}
+
+.cursorContrast {
+  cursor: pointer;
+  cursor: hand
+}
+
+.colorContrast1 {
+  color: #2C2A29;
+  text-align: center;
+}
+
+.colorContrast2 {
+  color: #2C2A29;
+  text-align: center;
+  opacity:60%;
+}
+
+.colorContrast3 {
+  color: #2C2A29;
+  text-align: center;
+  opacity:40%;
+}
+
+#constrastImg {
+  width: 107px;
+  height: 45px;
+  margin-top: 10px;
+  margin-left: 4px
+}

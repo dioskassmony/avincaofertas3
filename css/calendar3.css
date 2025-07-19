@@ -1,0 +1,120 @@
+#calenderMain {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  z-index: 10000;
+  left: 0;
+  top: 0;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.c-main {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 300px;
+  color: white;
+  background: #2b2b2b;
+  text-align: center;
+  border-radius: 4px;
+  letter-spacing: 1px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  display: none;
+}
+
+.month {
+  text-align: center;
+  padding: 6px;
+}
+
+.week {
+  display: inline-flex;
+  text-align: center;
+  padding: 6px;
+}
+
+.week .wDay {
+  padding: 6px;
+  margin: 10px;
+  color: white;
+}
+
+.date {
+    width: 5px;
+    height: 5px;
+    color: white;
+}
+
+#fillDate {
+  width: 100%;
+  color: white;
+}
+
+#fillDate tr, td {
+  padding: 6px;
+  color: white;
+}
+
+.date:hover {
+  background: rgb(73, 73, 73);
+  color: #ffffff;
+  cursor: pointer;
+  border-radius: 3px;
+}
+
+.date td:hover {
+  background: white;
+  color: #007bff;
+  font-weight: bold;
+}
+
+.year, .month {
+  padding: 5px;
+  cursor: pointer;
+}
+
+.yearDiv {
+  position: relative;
+  font-size: 25px;
+  padding: 6px;
+}
+
+.monthDiv {
+  position: relative;
+  font-size: 20px;
+  padding: 6px;
+}
+
+.left {
+  position: absolute;
+  left: 10px;
+  cursor: pointer;
+}
+
+.right {
+  position: absolute;
+  right: 10px;
+  cursor: pointer;
+}
+
+.wDay {
+  cursor: default;
+}
+
+.disabled{
+    color: rgb(187, 187, 187)
+}
+
+.disabled:hover{
+    background: #2b2b2b;
+    color: rgb(187, 187, 187);
+    font-weight: normal;
+}
+
+
+svg {
+  width: 16px;
+  height: 16px;
+}
+

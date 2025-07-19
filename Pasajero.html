@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pasajeros</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #fff;
+      color: #000;
+    }
+
+    .header {
+      background: #000;
+      color: white;
+      padding: 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .header h2 {
+      margin: 0;
+      font-size: 20px;
+      text-align: center;
+      flex: 1;
+    }
+
+    .header a img {
+      width: 20px;
+      filter: brightness(0) invert(1);
+    }
+
+    .passenger-box {
+      background: #fff;
+      border: 1px solid #ccc;
+      margin: 15px;
+      border-radius: 10px;
+      padding: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .passenger-box img {
+      width: 20px;
+      margin-right: 10px;
+    }
+
+    .passenger-box span {
+      font-size: 16px;
+      flex: 1;
+    }
+
+    .passenger-group {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px;
+      border-bottom: 1px solid #eee;
+    }
+
+    .passenger-group:last-child {
+      border-bottom: none;
+    }
+
+    .passenger-info {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .passenger-info .title {
+      font-weight: bold;
+      font-size: 16px;
+    }
+
+    .passenger-info .subtitle {
+      font-size: 13px;
+      color: #777;
+    }
+
+    .passenger-controls {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .circle-btn {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background-color: #eee;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      cursor: pointer;
+    }
+
+    .circle-btn.active {
+      background-color: #000;
+      color: #fff;
+    }
+
+    .counter {
+      font-size: 18px;
+      min-width: 20px;
+      text-align: center;
+    }
+
+    .btn-confirm {
+      display: block;
+      width: 90%;
+      margin: 30px auto 10px auto;
+      background-color: #000;
+      color: #fff;
+      border: none;
+      padding: 15px;
+      border-radius: 30px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .info-box {
+      background-color: #f2fdfb;
+      color: #007c6c;
+      padding: 10px 15px;
+      border-radius: 10px;
+      font-size: 13px;
+      text-align: center;
+      margin: 10px 20px;
+    }
+
+    .info-box a {
+      color: #007c6c;
+      text-decoration: none;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+<div class="header">
+    <a href="#"><img src="/ofertas/galeria/arrow.png"alt="Volver"></a>
+    <h2>Pasajeros</h2>
+    <a href="#"><img src="/ofertas/assets/svg/x_icon.png" alt="Cerrar"></a>
+  </div>
+
+  <div class="passenger-group">
+    <div class="passenger-info">
+      <span class="title">Adultos</span>
+      <span class="subtitle">Desde 15 años</span>
+    </div>
+    <div class="passenger-controls">
+      <div class="circle-btn active" onclick="updateCount('adult', -1)">-</div>
+      <div class="counter" id="count-adult">0</div>
+      <div class="circle-btn active" onclick="updateCount('adult', 1)">+</div>
+    </div>
+  </div>
+
+  <div class="passenger-group">
+    <div class="passenger-info">
+      <span class="title">Jóvenes</span>
+      <span class="subtitle">De 12 a 14 años</span>
+    </div>
+    <div class="passenger-controls">
+      <div class="circle-btn active" onclick="updateCount('young', -1)">-</div>
+      <div class="counter" id="count-young">0</div>
+      <div class="circle-btn active" onclick="updateCount('young', 1)">+</div>
+    </div>
+  </div>
+
+  <div class="passenger-group">
+    <div class="passenger-info">
+      <span class="title">Niños</span>
+      <span class="subtitle">De 2 a 11 años</span>
+    </div>
+    <div class="passenger-controls">
+      <div class="circle-btn active" onclick="updateCount('child', -1)">-</div>
+      <div class="counter" id="count-child">0</div>
+      <div class="circle-btn active" onclick="updateCount('child', 1)">+</div>
+    </div>
+  </div>
+
+  <div class="passenger-group">
+    <div class="passenger-info">
+      <span class="title">Bebés</span>
+      <span class="subtitle">Menores de 2 años</span>
+    </div>
+    <div class="passenger-controls">
+      <div class="circle-btn active" onclick="updateCount('baby', -1)">-</div>
+      <div class="counter" id="count-baby">0</div>
+      <div class="circle-btn active" onclick="updateCount('baby', 1)">+</div>
+    </div>
+  </div>
+
+  <!-- ✅ Redirección agregada aquí -->
+  <button class="btn-confirm" onclick="window.location.href='pasajero2.html'">Confirmar</button>
+
+  <div class="info-box">
+    <span><strong><a href="#">Conoce</a></strong> la política para jóvenes.</span>
+  </div>
+
+  <script>
+    const counts = {
+      adult: 4,
+      young: 1,
+      child: 0,
+      baby: 0
+    };
+
+    function updateCount(type, change) {
+  if (counts[type] + change >= 0) {
+    counts[type] += change;
+    document.getElementById(`count-${type}`).textContent = counts[type]; // Corrección aquí
+    updateTotal();
+  }
+}
+
+
+    function updateTotal() {
+      const total = Object.values(counts).reduce((a, b) => a + b, 0);
+      document.getElementById("totalCount").textContent = total;
+    }
+
+    // Inicializar conteo al cargar
+    updateTotal();
+  </script>
+
+</body>
+</html>

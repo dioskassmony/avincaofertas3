@@ -1,0 +1,1052 @@
+/*
+* SECTIONS
+*/
+.main {
+    padding-bottom: 2.25rem;
+}
+
+.cards--container {
+    padding-inline: 14px;
+}
+
+.cards--container h3 {
+    font-size: 1.375rem;
+    text-align: center;
+}
+
+
+
+
+
+
+
+
+/*
+* SPECIAL SECTIONS
+*/
+.sp-initial-content {
+    padding-top: 25px;
+    padding-inline: 14px;
+}
+
+
+
+
+
+
+
+
+
+/* 
+*  MODAL -- COVER
+*/
+.cover {
+    display: none;
+    /* Hidden by default */
+
+    position: fixed;
+    /* Stay in place */
+    z-index: 9999;
+    /* Sit on top */
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    overflow: auto;
+    /* Enable scroll if needed */
+    background-color: #fff;
+}
+
+.d-none {
+    display: none;
+}
+
+.show {
+    display: flex !important;
+}
+
+.cover--main {
+    width: 100%;
+
+    background-color: #1b1b1b;
+}
+
+.cover--header {
+    display: flex;
+
+    color: white;
+
+    align-items: baseline;
+    justify-content: space-between;
+
+    margin-block: 5px;
+    padding-inline: 20px;
+}
+
+.cover--header img {
+    width: 16px;
+}
+
+.cover--body {
+    background-color: #fff;
+    height: 100%;
+
+    border-top-right-radius: 15px;
+    border-top-left-radius: 15px;
+
+    padding-top: 25px;
+    padding-inline: 15px;
+}
+
+.search--input--container {
+    position: relative;
+}
+
+.search--input {
+    margin: 0;
+    margin-bottom: 12px;
+    padding: 21px 16px 7px 48px;
+    background-color: rgb(255 255 255 / 0%);
+    border-style: none;
+    border-bottom: 2px solid rgb(255 255 255 / 0);
+
+    border-radius: .25rem;
+    border: 1px solid #d9d9d9;
+
+    box-sizing: border-box;
+
+    min-height: 52px;
+
+    text-align: start;
+    width: 100%;
+}
+
+.search--input:focus {
+    outline: none;
+    border: 1px solid #d9d9d9;
+    border-bottom: 2px solid #34c759;
+}
+
+.search--input--icon {
+    position: absolute;
+    z-index: 999;
+    top: 15px;
+    left: 15px;
+
+    width: 18px;
+}
+
+.search--input--label {
+    position: absolute;
+    z-index: 998;
+    top: 8px;
+    left: 47px;
+
+    font-size: 11px;
+    color: #7f7f7f;
+
+    width: 20px;
+}
+
+.destination {
+    box-sizing: border-box;
+    padding: 16px 60px 15px 12px;
+    border-bottom: 1px solid #cccccc;
+}
+
+.destination:hover {
+    background-color: #f3f3f3;
+}
+
+.destination :nth-child(1) {
+    display: inline;
+    font-size: 16px;
+    font-weight: 700;
+
+    margin-right: 5px;
+}
+
+.destination :nth-child(2) {
+    display: inline;
+    font-size: 14px;
+    margin-right: 5px;
+}
+
+.destination :nth-child(3) {
+    display: inline;
+    font-size: 14px;
+}
+
+
+
+
+
+/*
+* FORMS
+*/
+.passenger-selector {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    align-items: center;
+
+    justify-content: space-between;
+}
+
+.passenger-btn {
+    min-width: 95px;
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    align-items: center;
+
+    justify-content: space-between;
+}
+
+.passenger-btn img {
+    width: 25px;
+    height: 25px;
+}
+
+.passenger-btn h1 {
+    font-size: 26px;
+}
+
+
+
+
+
+
+/*
+* MAIN-CARD
+*/
+.main--card {
+    padding-top: 16px;
+
+    border-radius: 16px;
+    background-color: rgba(255, 255, 255, 0.6);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+}
+
+.main--card--header {
+    display: flex;
+    justify-content: center;
+}
+
+.main--card--header form {
+
+    display: flex;
+    justify-content: space-between;
+    min-width: 14.6875rem;
+    box-sizing: border-box;
+    padding: 10px 18px;
+    background-color: #fff;
+    border-radius: 6.25rem;
+    box-shadow: 0 0.125rem 0.75rem rgba(27, 27, 27, .15);
+}
+
+.main--card--header form label {
+    font-size: .875rem;
+}
+
+.main--card--body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    margin-top: 16px;
+    padding: 20px 24px;
+
+    border-radius: 16px;
+    background-color: #fff;
+}
+
+/* MAIN-INPUT-GROUP */
+
+.main--input-group {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+
+    border-radius: .25rem;
+    border: 1px solid #d9d9d9;
+}
+
+.main--input-group .fd-icon {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    /* Asegúrate de que la imagen no sea más grande que el contenedor */
+    width: 20px;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.btn-ig {
+    position: relative;
+    margin: 0;
+    padding: 21px 16px 7px 48px;
+    background-color: rgb(255 255 255 / 0%);
+    border-style: none;
+    border-bottom: 2px solid rgb(255 255 255 / 0);
+    cursor: pointer;
+
+    text-align: start;
+    width: 100%;
+}
+
+#btn-passengers {
+    padding: 16px 21px 10px 48px !important;
+}
+
+.btn-ig:hover {
+    border-bottom: 2px solid #34c759;
+}
+
+
+.btn-ig-icon {
+    position: absolute;
+    z-index: 999;
+    top: 15px;
+    left: 15px;
+
+    width: 20px;
+}
+
+.btn-ig-label {
+    position: absolute;
+    z-index: 998;
+    top: 8px;
+    left: 47px;
+
+    font-size: 11px;
+    color: #7f7f7f;
+
+    width: 20px;
+}
+
+.btn-ig-text {
+    font-weight: 700;
+}
+
+/* MAIN-RADIOS */
+
+.radio-wrapper {
+    display: inline-block;
+    cursor: pointer;
+
+}
+
+.radio-circle {
+    width: 16px;
+    height: 16px;
+    border: 1px solid #7f7f7f;
+    border-radius: 50%;
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    opacity: 1;
+}
+
+.radio-circle:hover {
+    border: 1px solid #34c759;
+}
+
+.radio-dot {
+    width: 8px;
+    height: 8px;
+    background-color: #ffffff;
+    /* Color verde */
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    /* Se oculta por defecto */
+}
+
+.radio-label {
+    padding-left: 5px;
+    vertical-align: middle;
+}
+
+input[type="radio"] {
+    display: none;
+}
+
+input[type="radio"]:checked+.radio-circle {
+    border-color: #34c759;
+    /* Color verde cuando está seleccionado */
+    opacity: 1;
+}
+
+input[type="radio"]:checked~.radio-label {
+    font-weight: 700;
+}
+
+input[type="radio"]:checked+.radio-circle .radio-dot {
+    border: 5px solid #34c759;
+    opacity: 1;
+    /* Se muestra cuando está seleccionado */
+}
+
+
+
+
+
+
+
+/* MAIN-BANNER */
+.main--banner {
+    display: flex;
+    flex-direction: column;
+    border-radius: 25px;
+    overflow: hidden;
+    margin: 0 auto 32px auto;
+    max-width: 90%;
+    background: none;
+}
+
+.main--banner__img {
+    width: 100%;
+    height: 260px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.main--banner__body {
+    background: #ff0000;
+    color: #fff;
+    padding: 40px 32px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+.price{
+    margin-top: 20px;
+}
+
+.price span{
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #fff;
+}
+
+.button-main-banner {
+    margin-top: 24px;
+    border-radius: 25px;
+    border: none;
+    padding: .4375rem 1.5rem;
+    color: #000;
+    font-weight: 700;
+    background-color: #fff;
+    cursor: pointer;
+    font-size: 1.1rem;
+}
+
+@media (min-width: 992px) {
+    .main--banner {
+        flex-direction: row;
+        height: 350px;
+        max-width: 90%;
+    }
+    .main--banner__img {
+        width: 60%;
+        height: 100%;
+    }
+    .main--banner__img img {
+        height: 100%;
+        border-top-left-radius: 25px;
+        border-bottom-left-radius: 25px;
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+    }
+    .main--banner__body {
+        width: 40%;
+        height: 100%;
+        border-top-right-radius: 25px;
+        border-bottom-right-radius: 25px;
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+        padding: 48px 40px;
+        align-items: flex-start;
+    }
+}
+
+.main--banner--body h5 {
+    margin: 0;
+    font-size: 500.0rem;
+    line-height: 1;
+    display: block;
+}
+
+.main--banner--body p {
+    font-size: .75rem;
+    font-weight: 400;
+    line-height: 1, 325.;
+
+    margin-bottom: 10px;
+}
+
+.main--banner--body img {
+    position: absolute;
+
+    top: 25px;
+    right: 10px;
+
+    width: 62px;
+}
+
+
+.gallery {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin: 20px auto;
+    max-width: 800px;
+}
+
+.gallery-item {
+    width: calc(33.33% - 20px);
+    margin: 10px;
+    overflow: hidden;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.gallery-item img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/*
+* CARD-TRAVEL
+*/
+
+.contenedor-principal {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 0 auto;
+    max-width: 1200px;
+}
+
+.contenedor {
+    flex-basis: calc(33.33% - 20px);
+    background-color: lightblue;
+    margin: 10px;
+    padding: 20px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+}
+
+.card--travel {
+    height: 16.75rem;
+    border-radius: 15px;
+
+    margin-bottom: 16px;
+
+    position: relative;
+    overflow: hidden;
+    /* Oculta el exceso del pseudo-elemento */
+}
+
+.card--travel::before {
+
+    content: '';
+    position: absolute;
+    bottom: 0;
+    width: 200%;
+    height: 138px;
+    background: linear-gradient(bottom, transparent rgba(248, 249, 248, 0.75));
+}
+
+.card--travel--text {
+    text-align: left;
+    position: absolute;
+    bottom: 15px;
+    left: 15px;
+    color: #f6f3f3;
+}
+
+.card--travel--text h4 {
+    margin: 0;
+    font-size: 2rem;
+
+}
+
+.card--travel--text p {
+    margin: 0;
+    font-size: .875rem;
+}
+
+.card--bg--per {
+    background-image: url('../assets/svg/vuelos-baratos-a-qui');
+    background-position: center;
+    /* Centra la imagen */
+    background-size: cover;
+    position: relative;
+    overflow: hidden;
+    /* Oculta el exceso al hacer zoom out */
+
+    /* Tamaño y transición */
+    width: 100%;
+    height: 100%;
+}
+
+.card--bg--per::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: inherit;
+    background-position: inherit;
+    background-size: inherit;
+    transition: transform 0.5s ease-in-out;
+}
+
+/* Hover: Reducir la imagen */
+.card--bg--per:hover::before {
+    transform: scale(1.05);
+    /* Hace la imagen más pequeña */
+}
+
+
+
+/* Clases generales para todas las tarjetas */
+.card--bg--per,
+.card--bg--bga,
+.card--bg--med{
+    position: relative;
+    overflow: hidden;
+    /* Oculta el exceso de la imagen al hacer zoom out */
+    width: 100%;
+    height: 100%;
+}
+
+/* Pseudo-elemento que contiene la imagen de fondo */
+.card--bg--per::before,
+.card--bg--bga::before,
+.card--bg--med::before{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-position: center;
+    background-size: cover;
+    transition: transform 0.5s ease-in-out;
+}
+
+/* Asigna la imagen de fondo a cada clase usando `::before` */
+.card--bg--per::before {
+    background-image: url('../assets/svg/vuelos-baratos-a-qui');
+}
+
+.card--bg--bga::before {
+    background-image: url('/galeria/ibague-700x263.webp');
+}
+
+.card--bg--med::before {
+    background-image: url('/galeria/vuelos-a-cali-colombia-panoramica-ciudad.webp');
+}
+
+/* Hover: Hace la imagen más pequeña */
+.card--bg--per:hover::before,
+.card--bg--bga:hover::before,
+.card--bg--med:hover::before{
+    transform: scale(1.05);
+    
+}
+
+
+
+
+
+
+
+
+/*
+* NAVBAR
+*/
+.navbar {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+
+    padding: .75rem .875rem;
+}
+
+.navbar-hmenu {
+    align-self: center;
+}
+
+.navbar--logo {
+    display: flex;
+    width: 100%;
+    justify-content: left;
+    align-items: center;
+}
+
+.navbar--logo img {
+    width: 128px;
+}
+
+
+
+
+
+
+
+/*
+* FORM
+*/
+.input-text-secondary {
+    padding: 11px 49px;
+    height: 26px;
+
+    font-size: 1rem;
+
+    border-radius: 100vh;
+    border: 0;
+}
+
+.input-text-secondary:focus-visible {
+    outline: none;
+}
+
+
+
+
+/*
+* FORM-ICONS
+*/
+.-i-mail {
+    background-image: url("../assets/svg/i-mail.png");
+    background-repeat: no-repeat;
+    background-position-x: 20px;
+    background-position-y: center;
+    background-size: 18px;
+}
+
+
+
+
+
+
+/*
+* BUTTONS
+*/
+.btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    height: 3rem;
+    padding: 0.625rem 1.375rem;
+
+    cursor: pointer;
+
+    font-size: 1.25rem;
+    font-weight: 700;
+    line-height: 1.2;
+
+    border-radius: 100vh;
+    border-width: 2px;
+    border-style: solid;
+
+    transition: all 0.06s linear;
+    text-transform: none;
+}
+
+.btn-black {
+    background-color: #1b1b1b;
+    padding-block: 24px;
+    color: #ffffff;
+}
+
+.btn-black:hover {
+    border-color: #494949;
+    background-color: #494949;
+    color: #ffffff;
+}
+
+.btn-red {
+    border-color: red;
+    background-color: red;
+    color: #fff;
+}
+
+.btn-red:hover {
+    border-color: #D90000;
+    background-color: #D90000;
+}
+
+
+
+
+
+
+/*
+* FOOTER
+*/
+.footer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    background-color: #1b1b1b;
+    color: white;
+}
+
+.footer--main {
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    padding-inline: .875rem;
+    padding-top: 2rem;
+
+    line-height: 1.5;
+}
+
+.footer--logo {
+    text-align: center;
+    margin-bottom: 2.25rem;
+}
+
+.footer--accordion-item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    font-weight: 700;
+    font-size: 14px;
+    padding-block: 12px;
+}
+
+.footer--accordion-item img {
+    width: 15px;
+}
+
+.footer--end {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+
+    margin-top: 1px;
+    padding-block: 20px;
+    padding-inline: 14px;
+
+    font-size: 12px;
+}
+
+
+
+
+
+
+
+/*
+* TOOLKIT
+*/
+.loader {
+    display: none;
+    /* Hidden by default */
+
+    justify-content: center;
+    align-items: center;
+
+    position: fixed;
+    /* Stay in place */
+    z-index: 10000;
+    /* Sit on top */
+    left: 0;
+    top: 0;
+    height: 100vh;
+    width: 100vw;
+    overflow: auto;
+    /* Enable scroll if needed */
+    background-color: #fff;
+}
+
+.loader img {
+    width: 150px;
+    height: 150px;
+}
+
+input[type="date"] {
+    -webkit-appearance: textfield;
+    -moz-appearance: textfield;
+    min-height: 1.2em;
+}
+
+.sb-hidden {
+    overflow-y: hidden;
+}
+
+.text-normal {
+    font-size: 1.125rem;
+}
+
+.text-big {
+    font-size: 18px;
+}
+
+.text-thin {
+    font-size: 12px;
+}
+
+.bg-main-card {
+    background-image: url("../assets/svg/header_bg_blue.png");
+    background-size: cover;
+}
+
+.link-blue {
+    color: #048fa0;
+}
+
+.w-100 {
+    width: 100%;
+}
+
+/* --- SIZING --- */
+.vh-100 {
+    height: 100vh;
+}
+
+.mt-0 {
+    margin-top: 0;
+}
+
+.mt-1 {
+    margin-top: 5px;
+}
+
+.mt-2 {
+    margin-top: 12px;
+}
+
+.mt-3 {
+    margin-top: 20px;
+}
+
+.mt-4 {
+    margin-top: 25px;
+}
+
+.mt-5 {
+    margin-top: 35px;
+}
+
+.mb-0 {
+    margin-bottom: 0;
+}
+
+.mb-1 {
+    margin-bottom: 5px;
+}
+
+.mb-2 {
+    margin-bottom: 12px;
+}
+
+.mb-3 {
+    margin-bottom: 20px;
+}
+
+.mb-4 {
+    margin-bottom: 25px;
+}
+
+.mb-5 {
+    margin-bottom: 35px;
+}
+
+
+.logo-moviles {
+    max-height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    margin-top: 15px;
+}
+
+.button-menu {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    z-index: 1100;
+}
+
+@media (min-width: 1025px) {
+    .logo-moviles {
+        display: none;
+    }
+    .button-menu{
+        display: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .navbar {
+        display: none;
+    }
+}
+/* Ocultar la imagen grande en pantallas pequeñas */
+.img-large {
+    display: block;
+    visibility: visible;
+    height: auto;
+}
+
+.img-small {
+    display: none;
+    visibility: hidden;
+    height: 0;
+}
+
+@media (max-width: 768px) {
+    /* Mostrar la imagen pequeña en pantallas pequeñas */
+    .img-large {
+        display: none;
+        visibility: hidden;
+        height: 0;
+    }
+
+    .img-small {
+        display: block;
+        visibility: visible;
+        height: auto;
+    }
+}
+
+/* Imagen para pantallas grandes */
+@media (min-width: 769px) {
+    .main--banner__img {
+        background-image: url('../assets/svg/es-co-hot-sale-home-s.jpg');
+    }
+}
+
+/* Imagen para pantallas pequeñas */
+@media (max-width: 768px) {
+    .main--banner__img {
+        background-image: url('../assets/svg/es-ctg-hot-sale-home-s-v4-final-min-vuelos-baratos-avianca.jpg');
+    }
+}

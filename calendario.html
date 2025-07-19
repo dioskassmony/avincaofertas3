@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Calendario Avianca</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #fff;
+    }
+
+    .header {
+      background: #000;
+      color: white;
+      padding: 15px 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .header-icon {
+      font-size: 22px;
+      color: white;
+      background: none;
+      border: none;
+      cursor: pointer;
+      width: 30px;
+    }
+
+    .header-title {
+      flex: 1;
+      text-align: center;
+      font-size: 18px;
+      font-weight: bold;
+      margin: 0;
+    }
+
+    .date-box {
+      margin: 15px auto;
+      padding: 10px 15px;
+      width: 90%;
+      border: 1px solid #ccc;
+      border-radius: 12px;
+      background-color: #fff;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .date-label {
+      font-size: 13px;
+      color: #777;
+    }
+
+    .date-selected {
+      font-size: 16px;
+      font-weight: bold;
+      color: #000;
+      margin-top: 5px;
+    }
+
+    .calendar-container {
+      max-width: 400px;
+      margin: auto;
+      padding: 0 10px;
+    }
+
+    .calendar-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 10px;
+    }
+
+    .calendar-header button {
+      background: none;
+      border: none;
+      font-size: 20px;
+      cursor: pointer;
+    }
+
+    .calendar-header h2 {
+      font-size: 16px;
+      margin: 0;
+    }
+
+    .legend {
+      display: flex;
+      gap: 10px;
+      margin: 15px 0;
+      font-size: 13px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .legend span {
+      display: flex;
+      align-items: center;
+    }
+
+    .legend .circle {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      margin-right: 5px;
+    }
+
+    .calendar-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      text-align: center;
+      gap: 5px;
+      font-size: 14px;
+    }
+
+    .calendar-grid div {
+      padding: 10px 0;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+
+    .day-name {
+      font-weight: bold;
+      color: #888;
+      background: none !important;
+      cursor: default;
+    }
+
+    .price-low {
+      background: #aee4c9;
+    }
+
+    .price-mid {
+      background: #fcecb0;
+    }
+
+    .price-high {
+      background: #fbc3c3;
+    }
+
+    .selected-day {
+      background: #000;
+      color: white;
+    }
+
+    .empty {
+      cursor: default;
+      background: none;
+    }
+
+    .btn-confirm {
+      margin: 30px auto 40px auto;
+      display: block;
+      padding: 12px 25px;
+      font-size: 16px;
+      background-color: #000;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      width: 90%;
+      max-width: 400px;
+    }
+
+    .btn-confirm:hover {
+      background-color: #222;
+    }
+
+    @media (max-width: 480px) {
+      .calendar-grid div {
+        padding: 8px 0;
+      }
+
+      .header-title {
+        font-size: 16px;
+      }
+
+      .date-selected {
+        font-size: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+    <!-- Encabezado -->
+  <div class="header">
+    <button class="header-icon" onclick="history.back()">←</button>
+    <h1 class="header-title">Fechas</h1>
+    <button class="header-icon" onclick="alert('Cerrar')">✕</button>
+  </div>
+
+  <!-- Fecha seleccionada -->
+  <div class="date-box">
+    <span class="date-label">Ida</span>
+    <span id="selectedDate" class="date-selected">Seleccione una fecha</span>
+  </div>
+
+  <!-- Calendario -->
+  <div class="calendar-container">
+    <div class="calendar-header">
+      <button id="prevMonth">◀</button>
+      <h2 id="monthYear">Julio 2025</h2>
+      <button id="nextMonth">▶</button>
+    </div>
+
+    <div class="legend">
+      <span><div class="circle price-low"></div> $</span>
+      <span><div class="circle price-mid"></div> $$</span>
+      <span><div class="circle price-high"></div> $$$</span>
+    </div>
+
+    <div class="calendar-grid" id="calendarGrid"></div>
+  </div>
+
+  <!-- BOTÓN DE CONFIRMAR -->
+  <button class="btn-confirm" onclick="redirigirPasajeros()">Confirmar fecha</button>
+
+  <script>
+    const monthYearEl = document.getElementById('monthYear');
+    const calendarGrid = document.getElementById('calendarGrid');
+    const prevMonthBtn = document.getElementById('prevMonth');
+    const nextMonthBtn = document.getElementById('nextMonth');
+    const selectedDateDisplay = document.getElementById('selectedDate');
+
+    let selectedCell = null;
+    let selectedDateValue = null;
+    let currentDate = new Date(2025, 6); // Julio 2025
+
+    const priceMap = { 1: '$', 2: '$$', 3: '$$$' };
+
+    function getRandomPriceClass() {
+      const keys = Object.keys(priceMap);
+      const rand = keys[Math.floor(Math.random() * keys.length)];
+      return {
+        class: rand == 1 ? 'price-low' : rand == 2 ? 'price-mid' : 'price-high',
+        value: priceMap[rand]
+      };
+    }
+
+    function renderCalendar(date) {
+      const year = date.getFullYear();
+      const month = date.getMonth();
+
+      const monthNames = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+      monthYearEl.textContent = `${monthNames[month]} ${year}`;  <!-- Corrección de sintaxis -->
+      calendarGrid.innerHTML = '';
+
+      const firstDay = new Date(year, month, 1).getDay();
+      const daysInMonth = new Date(year, month + 1, 0).getDate();
+      const dayNames = ['Lu','Ma','Mi','Ju','Vi','Sa','Do'];
+
+      // Mostrar nombres de días
+      for (let dayName of dayNames) {
+        const dayEl = document.createElement('div');
+        dayEl.textContent = dayName;
+        dayEl.classList.add('day-name');
+        calendarGrid.appendChild(dayEl);
+      }
+
+      // Rellenar espacios vacíos antes del primer día del mes
+      const offset = (firstDay + 6) % 7;
+      for (let i = 0; i < offset; i++) {
+        const empty = document.createElement('div');
+        empty.classList.add('empty');
+        calendarGrid.appendChild(empty);
+      }
+
+      // Mostrar días del mes
+      for (let day = 1; day <= daysInMonth; day++) {
+        const cell = document.createElement('div');
+        cell.textContent = day;
+
+        const price = getRandomPriceClass();
+        cell.classList.add(price.class);
+
+        cell.addEventListener('click', () => {
+          if (selectedCell) selectedCell.classList.remove('selected-day');
+          cell.classList.add('selected-day');
+          selectedCell = cell;
+
+          selectedDateValue = `${String(day).padStart(2, '0')}/${String(month + 1).padStart(2, '0')}/${year}`; // Corrección de sintaxis
+          selectedDateDisplay.textContent = selectedDateValue;
+        });
+
+        calendarGrid.appendChild(cell);
+      }
+    }
+
+    function redirigirPasajeros() {
+      if (selectedDateValue) {
+        localStorage.setItem('fechaVuelo', selectedDateValue);
+        window.location.href = 'Pasajero.html';  // Redirige a la página de pasajeros
+      } else {
+        alert('Por favor selecciona una fecha');
+      }
+    }
+
+    // Eventos de los botones de cambio de mes
+    prevMonthBtn.addEventListener('click', () => {
+      currentDate.setMonth(currentDate.getMonth() - 1);
+      renderCalendar(currentDate);
+    });
+
+    nextMonthBtn.addEventListener('click', () => {
+      currentDate.setMonth(currentDate.getMonth() + 1);
+      renderCalendar(currentDate);
+    });
+
+    // Renderiza el calendario inicial
+    renderCalendar(currentDate);
+  </script>
+
+</body>
+</html>

