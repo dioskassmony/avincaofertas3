@@ -588,7 +588,7 @@ input[type="radio"]:checked+.radio-circle .radio-dot {
 }
 
 .card--bg--per {
-    background-image: url('../assets/svg/vuelos-baratos-a-qui');
+    background-image: url('../assets/svg/san\ andres\ isla.jpeg');
     background-position: center;
     /* Centra la imagen */
     background-size: cover;
