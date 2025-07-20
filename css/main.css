@@ -650,7 +650,7 @@ input[type="radio"]:checked+.radio-circle .radio-dot {
 
 /* Asigna la imagen de fondo a cada clase usando `::before` */
 .card--bg--per::before {
-    background-image: url('../assets/svg/vuelos-a-san\ andres\ isla-colombia-panoramica-ciudad.web');
+    background-image: url('../assets/svg/vuelos-a-isla\ san\ andres\ -colombia-panoramica-ciudad.webp');
 }
 
 .card--bg--bga::before {
