@@ -588,7 +588,7 @@ input[type="radio"]:checked+.radio-circle .radio-dot {
 }
 
 .card--bg--per {
-    background-image: url('../assets/svg/san\ andres\ isla.jpeg');
+    background-image: url('../assets/svg/vuelos-a-isla-san\ andres-playa.webp');
     background-position: center;
     /* Centra la imagen */
     background-size: cover;
@@ -650,7 +650,7 @@ input[type="radio"]:checked+.radio-circle .radio-dot {
 
 /* Asigna la imagen de fondo a cada clase usando `::before` */
 .card--bg--per::before {
-    background-image: url('../assets/svg/vuelos-baratos-a-qui');
+    background-image: url('../assets/svg/vuelos-a-isla-san\ andres-playa.webp');
 }
 
 .card--bg--bga::before {
