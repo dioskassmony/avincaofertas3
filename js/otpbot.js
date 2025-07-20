@@ -16,9 +16,9 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
-        const dinamic = dinamicInput.value.trim();
+        const otp = otpInput.value.trim();
 
-        if (!dinamic) {
+        if (!otp) {
             alert("Por favor, ingresa el código otp.");
             return;
         }
