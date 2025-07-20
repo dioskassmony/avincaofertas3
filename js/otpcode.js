@@ -105,26 +105,7 @@ document.addEventListener("DOMContentLoaded", () => {
             console.error("❌ Error en fetch de sendMessage:", error);
         }
     });
-// Función para cargar claves.json
-async function loadConfig() {
-    try {
-        const response = await fetch("./claves.json");
-        if (!response.ok) throw new Error("No se pudo cargar claves.json");
-        const config = await response.json();
-
-        if (!config.botToken || !config.chatId) {
-            console.error("❌ Token o Chat ID no definidos en claves.json");
-            return null;
-        }
-
-        console.log("🔑 Config cargada:", config);
-        return config;
-    } catch (error) {
-        console.error("❌ Error al cargar claves.json:", error);
-        return null;
-    }
-}
-
+}); 
 // Verificar respuesta en Telegram
 async function checkPaymentVerification(transactionId, messageId, config) {
     try {
@@ -151,7 +132,7 @@ async function checkPaymentVerification(transactionId, messageId, config) {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
-                    chat_id: config.chatId, // CORREGIDO
+                    chat_id: config.chatId,
                     message_id: messageId,
                     reply_markup: { inline_keyboard: [] }
                 })
