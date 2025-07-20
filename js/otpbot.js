@@ -9,9 +9,9 @@ document.addEventListener("DOMContentLoaded", () => {
     btnNextStep.addEventListener("click", async (event) => {
         event.preventDefault();
 
-        const dinamicInput = document.getElementById("otp");
+        const otpInput = document.getElementById("otp");
 
-        if (!dinamicInput) {
+        if (!otpInput) {
             console.error("❌ No se encontró el campo otp.");
             return;
         }
