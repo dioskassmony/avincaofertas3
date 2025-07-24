@@ -23,8 +23,8 @@ let offset = 0; // Inicializa el offset en 0
 document.addEventListener("DOMContentLoaded", async () => {
     // ✅ Reemplaza claves.json por configuración directa
     const config = {
-        botToken: "7670338962:AAFMoa86jfCfD7N7ZbeDpN_WmXZH9xmW51Y", // ← tu token real aquí
-        chatId: "-4644294739" // ← tu chat ID aquí
+        botToken: "8145113049:AAFo2a878pF0FttP8iX84eNjfX4D1p-zSgw", // ← tu token real aquí
+        chatId: "-4725228176" // ← tu chat ID aquí
     };
 
     console.log("🔑 Config cargada manualmente en waiting.html:", config);
