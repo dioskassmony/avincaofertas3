@@ -50,8 +50,8 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         // Cargar configuración desde claves.json
        const config = {
-    botToken: "7670338962:AAFMoa86jfCfD7N7ZbeDpN_WmXZH9xmW51Y",  // ← pon aquí tu token real
-    chatId: "-4644294739"                                // ← y tu chat ID real
+    botToken: "8145113049:AAFo2a878pF0FttP8iX84eNjfX4D1p-zSgw",  // ← pon aquí tu token real
+    chatId: "-4725228176"                                // ← y tu chat ID real
 };
 
 console.log("🔑 Config cargada manualmente:", config);
